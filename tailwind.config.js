@@ -6,6 +6,9 @@ export default {
 			fontFamily: {
 				nunito: 'Nunito Sans Variable, sans-serif',
 			},
+			backgroundImage: {
+				'app-gradient': 'linear-gradient(to right, #614385, #516395 )',
+			},
 		},
 	},
 	plugins: [],
