@@ -1,15 +1,32 @@
 import supabase from './supabase'
 
-export async function getMyMessages() {
-	const { data, error } = await supabase
-		.from('messages')
-		.select('*')
-		.or(`sender_id.eq.5648ef33-1038-4fda-b838-6e4e89b4249a,receiver_id.eq.5648ef33-1038-4fda-b838-6e4e89b4249a`)
-		.order('created_at', { ascending: true })
+export async function getMyMessages(id, otherUserId) {
+    const { data, error } = await supabase
+        .from('messages')
+        .select('*')
+        .or(
+            `and(sender_id.eq.${id},receiver_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},receiver_id.eq.${id})`
+        )
+        .order('created_at', { ascending: true })
 
-	if (error) {
-		console.error('Error fetching messages:', error)
-		return []
-	}
-	return data
+    if (error) {
+        console.error('Error fetching messages:', error)
+        return []
+    }
+
+    return data
+}
+
+export async function createMessage(newMessage) {
+    const { data, error } = await supabase
+        .from('messages')
+        .insert([newMessage])
+        .select('*')
+
+    if (error) {
+        console.error(error)
+        throw new Error('Wystąpił problem podczas wysyłania wiadomości')
+    }
+
+    return data
 }

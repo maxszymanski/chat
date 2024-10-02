@@ -1,18 +1,18 @@
-import { useNavigate } from 'react-router-dom'
 import { useUser } from '../users/useUser'
 import ChatHeader from './ChatHeader'
 import ChatMain from './ChatMain'
 import ChatMessage from './ChatMessage'
-import { useEffect } from 'react'
+
+import Loader from '../components/Loader'
+import { checkAndAddUser } from '../services/apiAuth'
 
 function Chat() {
-    const { isAuthenticated, user } = useUser()
-    const navigate = useNavigate()
+    const { isLoading, user } = useUser()
 
-    useEffect(() => {
-        if (isAuthenticated) return
-        if (!isAuthenticated) navigate('/', { replace: true })
-    }, [isAuthenticated, navigate])
+    if (user) {
+        checkAndAddUser(user?.id, user.email, user.user_metadata.username)
+    }
+    if (isLoading) return <Loader />
 
     return (
         <div className="h-dvh flex flex-col overflow-hidden">

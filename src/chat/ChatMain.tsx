@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react'
-import { getMyMessages } from '../services/apiChat'
 import { useUser } from '../users/useUser'
+import { useMessages } from './useMessages'
+import Loader from '../components/Loader'
 
 function ChatMain() {
-    const [messages, setMessages] = useState([])
-    const { user } = useUser()
+    const { isLoading, messages } = useMessages()
+    const { user, isLoading: isUserLoading } = useUser()
 
-    useEffect(() => {
-        const fetchMessages = async () => {
-            const fetchedMessages = await getMyMessages()
-            setMessages(fetchedMessages) //
-        }
-
-        fetchMessages()
-    }, [])
+    if (isLoading || isUserLoading) return <Loader />
 
     return (
         <main className="flex-grow  overflow-y-auto px-6  text-lg py-6 ">

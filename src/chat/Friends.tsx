@@ -1,0 +1,23 @@
+import Loader from '../components/Loader'
+import UserLink from '../users/UserLink'
+import { useUsers } from '../users/useUsers'
+
+function Friends() {
+    const { users, isLoading } = useUsers()
+    const us = users?.[1]
+
+    if (isLoading) return <Loader />
+
+    return (
+        <div className="h-dvh p-6">
+            <h2 className="text-blue-600 text-2xl uppercase mb-7">Live Chat</h2>
+            <ul>
+                {users?.map((us) => (
+                    <UserLink to={us.id} key={us.id} username={us.username} />
+                ))}
+            </ul>
+        </div>
+    )
+}
+
+export default Friends

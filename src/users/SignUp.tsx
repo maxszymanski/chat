@@ -1,12 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import useLogin from './useLogin'
 import { useUser } from './useUser'
 import { useEffect } from 'react'
 import { User } from '../types/types'
+import Loader from '../components/Loader'
+import { useSignUp } from './useSignUp'
 
-function Login() {
-    const { login, isPending } = useLogin()
+function SignUp() {
+    const { signUp, isPending } = useSignUp()
 
     const { isLoading, isAuthenticated } = useUser()
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ function Login() {
         handleSubmit,
         formState: { errors },
         reset,
+        getValues,
     } = useForm<User>()
 
     useEffect(
@@ -26,19 +28,15 @@ function Login() {
         [isAuthenticated, isLoading, navigate]
     )
 
-    const onSubmit: SubmitHandler<User> = (user) => {
-        login(user, {
-            onSuccess: () => {
-                reset()
-                navigate('/chat', { replace: true })
-            },
-        })
+    const onSubmit: SubmitHandler<User> = (newUser) => {
+        signUp(newUser, { onSettled: () => reset() })
+        // createUser(userInfo)
     }
 
     return (
         <div className="h-dvh flex flex-col items-center justify-center">
             <h2 className="text-blue-400 text-5xl text-center uppercase">
-                Zaloguj się
+                Wpisz się
             </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -57,6 +55,15 @@ function Login() {
                         },
                     })}
                 />
+                <input
+                    className="py-2 px-6 rounded-2xl"
+                    placeholder="Imię"
+                    id="username"
+                    type="text"
+                    {...register('username', {
+                        required: 'Nieprawidłowe Imię',
+                    })}
+                />
 
                 <input
                     className="py-2 px-6 rounded-2xl"
@@ -71,18 +78,31 @@ function Login() {
                         },
                     })}
                 />
+                <input
+                    {...register('passwordConfirm', {
+                        required: 'Podane hasła nie są zgodne',
+                        validate: (value) =>
+                            value === getValues().password ||
+                            'Hasła nie są identyczne',
+                    })}
+                    type="password"
+                    id="passwordConfirm"
+                    placeholder="Powtórz hasło"
+                    disabled={isPending}
+                    className="py-2 px-6 rounded-2xl"
+                />
                 <button className="p-2 bg-blue-400 rounded-2xl font-medium text-blue-50">
-                    {isPending ? 'Logowanie' : 'Zaloguj'}
+                    {isPending ? 'Wpisywanie...' : 'Wpisz się'}
                 </button>
                 <Link
-                    to="/signup"
+                    to="/login"
                     className=" block p-2 bg-blue-200 rounded-2xl text-center font-medium"
                 >
-                    Wpisz się
+                    Logowanie
                 </Link>
             </form>
         </div>
     )
 }
 
-export default Login
+export default SignUp

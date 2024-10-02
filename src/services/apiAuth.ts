@@ -12,8 +12,38 @@ export async function signIn({
         email,
         password,
     })
-    if (error) throw new Error(error.message)
+    if (error) {
+        console.error('Logowanie nieudane:', error.message)
+    }
     return data
+}
+
+export async function checkAndAddUser(userId, email, username) {
+    const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+
+    if (userError) {
+        console.error(
+            'Błąd podczas sprawdzania użytkownika w tabeli:',
+            userError.message
+        )
+        return
+    }
+
+    if (userData.length === 0) {
+        const { error: insertError } = await supabase
+            .from('users')
+            .insert([{ id: userId, email, username }])
+
+        if (insertError) {
+            console.error(
+                'Błąd podczas dodawania użytkownika do tabeli `users`:',
+                insertError.message
+            )
+        }
+    }
 }
 
 export async function getCurrentUser() {
@@ -28,13 +58,17 @@ export async function singOut() {
     const { error } = await supabase.auth.signOut()
     if (error) throw new Error(error.message)
 }
-export async function signUp({ email = '', password = '', userName = '' }) {
+export async function signUp({
+    email = '',
+    password = '',
+    username = 'Anonim',
+}) {
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
             data: {
-                userName,
+                username,
             },
         },
     })
@@ -42,16 +76,36 @@ export async function signUp({ email = '', password = '', userName = '' }) {
     return data
 }
 
-export async function addUser(newUser: User) {
+export async function getAllUsers() {
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+    const currentUserId = session?.user?.id
+
     const { data, error } = await supabase
         .from('users')
-        .insert([newUser])
         .select('*')
-    console.log(newUser)
+        .not('id', 'eq', currentUserId)
+        .order('username', { ascending: true })
+
+    if (error) {
+        console.error('Error fetching messages:', error)
+        return []
+    }
+
+    return data
+}
+
+export async function getUserFriend(id: string) {
+    const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', id)
+        .single()
 
     if (error) {
         console.error(error)
+        throw new Error('Nie znaleziono użytkownika')
     }
-
     return data
 }
