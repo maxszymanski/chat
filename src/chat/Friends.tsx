@@ -4,7 +4,6 @@ import { useUsers } from '../users/useUsers'
 
 function Friends() {
     const { users, isLoading } = useUsers()
-    const us = users?.[1]
 
     if (isLoading) return <Loader />
 

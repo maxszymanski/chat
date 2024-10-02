@@ -7,7 +7,7 @@ function ChatHeader() {
     return (
         <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200">
             <div className="flex justify-between items-center gap-4">
-                <Link className="block" to="/">
+                <Link className="block" to="/chat">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -24,7 +24,7 @@ function ChatHeader() {
                     </svg>
                 </Link>
                 <img
-                    src="https://www.clarin.com/2024/07/04/uteodLeuh_2000x1500__1.jpg"
+                    src="/default-user.webp"
                     className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover"
                 />
                 <p className="font-semibold text-lg">

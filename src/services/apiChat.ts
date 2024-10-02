@@ -1,6 +1,6 @@
 import supabase from './supabase'
 
-export async function getMyMessages(id, otherUserId) {
+export async function getMyMessages(id: string, otherUserId: string) {
     const { data, error } = await supabase
         .from('messages')
         .select('*')
@@ -17,7 +17,7 @@ export async function getMyMessages(id, otherUserId) {
     return data
 }
 
-export async function createMessage(newMessage) {
+export async function createMessage(newMessage: {}) {
     const { data, error } = await supabase
         .from('messages')
         .insert([newMessage])

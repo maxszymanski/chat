@@ -1,4 +1,3 @@
-import { User } from '../types/types'
 import supabase from './supabase'
 
 export async function signIn({
@@ -18,7 +17,11 @@ export async function signIn({
     return data
 }
 
-export async function checkAndAddUser(userId, email, username) {
+export async function checkAndAddUser(
+    userId: string,
+    email: string,
+    username: string
+) {
     const { data: userData, error: userError } = await supabase
         .from('users')
         .select('*')

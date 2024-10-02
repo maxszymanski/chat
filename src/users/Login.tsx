@@ -14,7 +14,7 @@ function Login() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
         reset,
     } = useForm<User>()
 

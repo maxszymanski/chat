@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from './useUser'
 import { useEffect } from 'react'
 import { User } from '../types/types'
-import Loader from '../components/Loader'
 import { useSignUp } from './useSignUp'
 
 function SignUp() {
@@ -15,7 +14,7 @@ function SignUp() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        // formState: { errors },
         reset,
         getValues,
     } = useForm<User>()

@@ -10,7 +10,7 @@ function Chat() {
     const { isLoading, user } = useUser()
 
     if (user) {
-        checkAndAddUser(user?.id, user.email, user.user_metadata.username)
+        checkAndAddUser(user?.id, user.email || '', user.user_metadata.username)
     }
     if (isLoading) return <Loader />
 

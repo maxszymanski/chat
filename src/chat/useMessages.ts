@@ -12,10 +12,10 @@ export function useMessages() {
     const {
         isLoading,
         error,
-        data: messages,
+        data: messages = [],
     } = useQuery({
-        queryKey: ['messages', userId],
-        queryFn: () => getMyMessages(userId, otherUserId),
+        queryKey: ['messages', userId, otherUserId],
+        queryFn: () => getMyMessages(userId, otherUserId || ''),
     })
     return { isLoading, error, messages }
 }

@@ -12,16 +12,28 @@ function ChatMain() {
         <main className="flex-grow  overflow-y-auto px-6  text-lg py-6 ">
             <ul className="flex flex-col justify-end gap-4 h-full">
                 {messages.map((message) => (
-                    <p
+                    <div
                         key={message.id}
-                        className={` p-3 max-w-60  rounded-2xl  w-fit ${
+                        className={`flex gap-2 items-end ${
                             message.sender_id === user?.id
-                                ? 'bg-white self-start'
-                                : 'bg-blue-300 self-end'
+                                ? 'self-start flex-row '
+                                : 'self-end  flex-row-reverse'
                         }`}
                     >
-                        {message.content}
-                    </p>
+                        <img
+                            src="/default-user.webp"
+                            className="w-7 h-7 md:w-11 md:h-11 rounded-full object-cover"
+                        />
+                        <p
+                            className={` p-3 max-w-60  rounded-2xl  w-fit ${
+                                message.sender_id === user?.id
+                                    ? 'bg-white '
+                                    : 'bg-blue-300 '
+                            }`}
+                        >
+                            {message.content}
+                        </p>
+                    </div>
                 ))}
             </ul>
         </main>

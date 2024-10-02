@@ -4,3 +4,9 @@ export interface User {
     passwordConfirm: string
     username: string
 }
+
+export interface MessageType {
+    sender_id: string
+    receiver_id: string
+    content: string
+}
