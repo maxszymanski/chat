@@ -6,8 +6,9 @@ function UserLink({ to, username }: { to: string; username: string }) {
             <Link className="flex items-center gap-6 py-4 " to={`/chat/${to}`}>
                 <img
                     src="/default-user.webp"
-                    className="w-9 h-9 md:w-11 md:h-11 rounded-full object-cover"
+                    className="w-9 h-9 object-cover rounded-full  bg-stone-50 border border-stone-50  overflow-hidden"
                 />
+
                 <p className="text-2xl text-blue-900">{username}</p>
             </Link>
         </li>

@@ -8,6 +8,8 @@ import Homepage from './Homepage'
 import ProtectedRoute from './components/ProtectedRouth'
 import SignUp from './users/SignUp'
 import Friends from './chat/Friends'
+import EmptyMain from './chat/FriendsDesktop'
+import FriendsDesktop from './chat/FriendsDesktop'
 
 const router = createBrowserRouter([
     {
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <Friends />,
+                element: <FriendsDesktop />,
             },
             {
                 path: '/chat/:userId',
@@ -49,7 +51,7 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <RouterProvider router={router} />
-            <ReactQueryDevtools initialIsOpen={false} />
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </QueryClientProvider>
     )
 }
