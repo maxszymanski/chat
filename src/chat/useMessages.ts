@@ -33,7 +33,9 @@ export function useMessages() {
                     table: 'messages',
                 },
                 () => {
-                    getMyMessages(userId, otherUserId || '')
+                    queryClient.invalidateQueries({
+                        queryKey: ['messages', userId, otherUserId],
+                    })
                 }
             )
             .subscribe()
