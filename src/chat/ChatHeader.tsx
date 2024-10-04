@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useFriend } from './useFriend'
+import Avatar from '../users/Avatar'
 
 function ChatHeader() {
     const { friend } = useFriend()
@@ -7,7 +8,7 @@ function ChatHeader() {
     return (
         <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200">
             <div className="flex justify-between items-center gap-4">
-                <Link className="block" to="/chat">
+                <Link className="block md:hidden" to="/chat">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -23,10 +24,7 @@ function ChatHeader() {
                         />
                     </svg>
                 </Link>
-                <img
-                    src="/default-user.webp"
-                    className="w-9 h-9 object-cover rounded-full  bg-stone-50 border border-stone-50  overflow-hidden"
-                />
+                <Avatar />
                 <p className="font-semibold text-lg">
                     {friend?.username || 'Anonim'}
                 </p>

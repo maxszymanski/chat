@@ -3,13 +3,12 @@ import AppLayout from './components/AppLayout'
 import Chat from './chat/Chat'
 import Login from './users/Login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Homepage from './Homepage'
 import ProtectedRoute from './components/ProtectedRouth'
 import SignUp from './users/SignUp'
-import Friends from './chat/Friends'
-import EmptyMain from './chat/FriendsDesktop'
-import FriendsDesktop from './chat/FriendsDesktop'
+import ChatNavigation from './chat/ChatNavigation'
+import NoChatSelected from './components/NoChatSelected'
 
 const router = createBrowserRouter([
     {
@@ -35,7 +34,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <FriendsDesktop />,
+                element: <ChatNavigation />,
             },
             {
                 path: '/chat/:userId',

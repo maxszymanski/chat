@@ -26,7 +26,7 @@ function ChatMain() {
 
     return (
         <main className="flex-1 overflow-y-auto px-6 py-6 text-lg">
-            <ul className="flex flex-col gap-4 justify-end min-h-full">
+            <ul className="flex flex-col gap-4 justify-end min-h-full ">
                 {messages.map((message, index) => {
                     const isLastFromUser =
                         index === messages.length - 1 || // Jeśli jest ostatnią wiadomością
@@ -52,7 +52,7 @@ function ChatMain() {
                         >
                             <img
                                 src="/default-user.webp"
-                                className={`w-9 h-9  rounded-full object-cover mb-1 bg-stone-50 border border-stone-50 p-0.5 ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
+                                className={`w-7 h-7  rounded-full object-cover   ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
                             />
                             {isSvg ? (
                                 parse(`${message.content}`)

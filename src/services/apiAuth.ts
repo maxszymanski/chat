@@ -79,6 +79,11 @@ export async function signUp({
     return data
 }
 
+export async function logout() {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw new Error(error.message)
+}
+
 export async function getAllUsers() {
     const {
         data: { session },

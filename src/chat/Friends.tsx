@@ -8,8 +8,7 @@ function Friends() {
     if (isLoading) return <Loader />
 
     return (
-        <div className="h-dvh p-6 pr-16 md:border-r border-stone-200 hidden md:block">
-            <h2 className="text-blue-600 text-2xl uppercase mb-7">Live Chat</h2>
+        <div className=" h-full p-6 pr-16 md:border-r border-stone-200  block w-full md:w-fit">
             <ul>
                 {users?.map((us) => (
                     <UserLink to={us.id} key={us.id} username={us.username} />
