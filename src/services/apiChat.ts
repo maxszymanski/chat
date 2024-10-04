@@ -1,3 +1,4 @@
+import { MessageType } from '../types/types'
 import supabase from './supabase'
 
 export async function getMyMessages(id: string, otherUserId: string) {
@@ -17,7 +18,7 @@ export async function getMyMessages(id: string, otherUserId: string) {
     return data
 }
 
-export async function createMessage(newMessage: {}) {
+export async function createMessage(newMessage: MessageType) {
     const { data, error } = await supabase
         .from('messages')
         .insert([newMessage])

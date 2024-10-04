@@ -26,9 +26,9 @@ function ChatMessage() {
 
     const onSubmit = ({ content }: { content: string }) => {
         const newMessage = {
-            sender_id: user?.id,
-            receiver_id: userId,
-            content,
+            sender_id: user?.id || '1',
+            receiver_id: userId || '2',
+            content: content,
         }
 
         sendMessage(newMessage, {
@@ -39,8 +39,8 @@ function ChatMessage() {
     }
     const sendLike = () => {
         const newMessage = {
-            sender_id: user?.id,
-            receiver_id: userId,
+            sender_id: user?.id || '1',
+            receiver_id: userId || '2',
             content: like,
         }
 

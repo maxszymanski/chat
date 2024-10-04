@@ -38,8 +38,8 @@ function ChatMain() {
                             : 'bg-blue-300 '
                     }`
 
-                    const isSvg = message.content.startsWith('<svg')
-                    const isLink = message.content.startsWith('http')
+                    // const isSvg = message.content.startsWith('<svg')
+                    // const isLink = message.content.startsWith('http')
 
                     return (
                         <li
@@ -54,7 +54,7 @@ function ChatMain() {
                                 src="/default-user.webp"
                                 className={`w-9 h-9  rounded-full object-cover mb-1 bg-stone-50 border border-stone-50 p-0.5 ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
                             />
-                            {isSvg ? (
+                            {/* {isSvg ? (
                                 parse(`${message.content}`)
                             ) : isLink ? (
                                 <Link
@@ -67,7 +67,9 @@ function ChatMain() {
                                 </Link>
                             ) : (
                                 <p className={commonClass}>{message.content}</p>
-                            )}
+                            )} */}
+
+                            <p className={commonClass}>{message.content}</p>
                         </li>
                     )
                 })}
