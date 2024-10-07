@@ -1,8 +1,8 @@
+import { useChatContext } from '../context/useChatContext'
 import Avatar from '../users/Avatar'
-import useLogout from '../users/useLogout'
 
 function Header() {
-    const { logout } = useLogout()
+    const { handleToogleLogoutModal } = useChatContext()
 
     return (
         <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4">
@@ -14,7 +14,7 @@ function Header() {
                     Maksymilian
                 </p>
                 <Avatar />
-                <button className="p-2 ml-1" onClick={() => logout()}>
+                <button className="p-2 ml-1" onClick={handleToogleLogoutModal}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

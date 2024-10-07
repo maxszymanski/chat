@@ -10,3 +10,8 @@ export interface MessageType {
     receiver_id: string
     content: string
 }
+
+export interface ChatContextType {
+    isLogoutModelOpen: boolean
+    handleToogleLogoutModal: () => void
+}

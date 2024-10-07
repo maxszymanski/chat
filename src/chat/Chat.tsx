@@ -15,7 +15,7 @@ function Chat() {
     if (isLoading) return <Loader />
 
     return (
-        <div className="h-full flex flex-col flex-1  md:max-w-3xl mx-auto  md:border md:border-stone-200 md:h-[90%]  md:mt-10 md:rounded-lg">
+        <div className="h-full flex flex-col  ">
             <ChatHeader />
             <ChatMain />
             <ChatMessage />

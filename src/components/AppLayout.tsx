@@ -1,8 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import Header from '../chat/Header'
 import Friends from '../chat/Friends'
+import Modal from './Modal'
+import { useChatContext } from '../context/useChatContext'
 
 function AppLayout() {
+    const { isLogoutModelOpen } = useChatContext()
     return (
         <>
             <div className="bg-gray-100 font-nunito overflow-hidden h-screen md:hidden">
@@ -18,6 +21,7 @@ function AppLayout() {
                     </div>
                 </div>
             </div>
+            {isLogoutModelOpen && <Modal />}
         </>
     )
 }

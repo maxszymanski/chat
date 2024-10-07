@@ -8,7 +8,9 @@ import Homepage from './Homepage'
 import ProtectedRoute from './components/ProtectedRouth'
 import SignUp from './users/SignUp'
 import ChatNavigation from './chat/ChatNavigation'
-import NoChatSelected from './components/NoChatSelected'
+import { ChatProvider } from './context/ChatContext'
+import Account from './users/Account'
+import UserProfile from './users/UserProfile'
 
 const router = createBrowserRouter([
     {
@@ -40,7 +42,17 @@ const router = createBrowserRouter([
                 path: '/chat/:userId',
                 element: <Chat />,
             },
+            { path: 'chat/account', element: <Account /> },
         ],
+    },
+    {
+        path: '/account',
+        element: (
+            <ProtectedRoute>
+                <Account />
+            </ProtectedRoute>
+        ),
+        children: [{ path: '', element: <UserProfile /> }],
     },
 ])
 
@@ -48,10 +60,12 @@ const queryClient = new QueryClient()
 
 function App() {
     return (
-        <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </QueryClientProvider>
+        <ChatProvider>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            </QueryClientProvider>
+        </ChatProvider>
     )
 }
 
