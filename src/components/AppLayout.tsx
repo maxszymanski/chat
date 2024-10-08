@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Header from '../chat/Header'
 import Friends from '../chat/Friends'
-import Modal from './Modal'
+import LogoutModal from './LogoutModal'
 import { useChatContext } from '../context/useChatContext'
 
 function AppLayout() {
@@ -21,7 +21,7 @@ function AppLayout() {
                     </div>
                 </div>
             </div>
-            {isLogoutModelOpen && <Modal />}
+            {isLogoutModelOpen && <LogoutModal />}
         </>
     )
 }

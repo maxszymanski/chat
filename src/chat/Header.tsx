@@ -1,19 +1,27 @@
+import { Link } from 'react-router-dom'
 import { useChatContext } from '../context/useChatContext'
 import Avatar from '../users/Avatar'
+import { useUser } from '../users/useUser'
 
 function Header() {
     const { handleToogleLogoutModal } = useChatContext()
+    const { user } = useUser()
+    console.log(user)
+
+    const name = user?.user_metadata.name || 'User'
 
     return (
-        <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4">
+        <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100">
             <h2 className="text-blue-600 text-xl sm:text-2xl uppercase ">
                 Live Chat
             </h2>
             <div className="flex items-center gap-4">
-                <p className="hidden sm:block text-blue-500 text-lg font-medium">
-                    Maksymilian
-                </p>
-                <Avatar />
+                <p className=" text-blue-500 text-lg font-medium">{name}</p>
+
+                <Link to="/account">
+                    <Avatar />
+                </Link>
+
                 <button className="p-2 ml-1" onClick={handleToogleLogoutModal}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

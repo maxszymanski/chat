@@ -1,7 +1,9 @@
-function Avatar({ type = 'small' }: { type: string }) {
+function Avatar({ type = 'small' }) {
+    const image = ''
+
     return (
         <img
-            src="/default-user.webp"
+            src={image || '/default-user.webp'}
             className={` object-cover rounded-full ${type === 'small' ? 'w-9 h-9' : 'w-36 h-36'}`}
         />
     )

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function UserHeader() {
     return (
-        <div className="flex w-full  items-center px-5 pt-4 pb-3 border-b border-gray-200 gap-3">
+        <div className="flex w-full  items-center px-5 pt-4 pb-3 border-b border-gray-200 gap-3 bg-slate-100">
             <Link className="block p-2" to="/chat">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

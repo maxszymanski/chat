@@ -6,7 +6,7 @@ function ChatHeader() {
     const { friend } = useFriend()
 
     return (
-        <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200">
+        <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200 ">
             <div className="flex justify-between items-center gap-4">
                 <Link className="block md:hidden" to="/chat">
                     <svg
