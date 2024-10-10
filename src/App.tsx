@@ -11,6 +11,7 @@ import ChatNavigation from './chat/ChatNavigation'
 import { ChatProvider } from './context/ChatContext'
 import Account from './users/Account'
 import UserProfile from './users/UserProfile'
+import { Toaster } from 'react-hot-toast'
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,6 @@ const router = createBrowserRouter([
                 path: '/chat/:userId',
                 element: <Chat />,
             },
-            { path: 'chat/account', element: <Account /> },
         ],
     },
     {
@@ -63,6 +63,32 @@ function App() {
         <ChatProvider>
             <QueryClientProvider client={queryClient}>
                 <RouterProvider router={router} />
+                <Toaster
+                    position={'bottom-center'}
+                    gutter={12}
+                    containerStyle={{
+                        marginBottom: '10px',
+                    }}
+                    toastOptions={{
+                        success: {
+                            duration: 2000,
+                        },
+                        error: {
+                            duration: 2000,
+                            style: {
+                                backgroundColor: '#ef4444',
+                            },
+                        },
+                        style: {
+                            fontSize: '18px',
+                            padding: '16px 20px',
+                            backgroundColor: '#8fcc33',
+                            color: '#fff',
+                            fontFamily: 'Nunito Sans Variable',
+                            textAlign: 'center',
+                        },
+                    }}
+                />
                 {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             </QueryClientProvider>
         </ChatProvider>

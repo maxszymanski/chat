@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useUser } from '../users/useUser'
 import Loader from './Loader'
+import ModalManager from './ModalManager'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
     const { isAuthenticated, isLoading } = useUser()
@@ -14,7 +15,12 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
         [isAuthenticated, isLoading, navigate]
     )
     if (isLoading) return <Loader />
-    return isAuthenticated ? children : null
+    return isAuthenticated ? (
+        <>
+            {children}
+            <ModalManager />
+        </>
+    ) : null
 }
 
 export default ProtectedRoute

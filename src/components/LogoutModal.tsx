@@ -6,32 +6,23 @@ import ModalLayout from './ModalLayout'
 
 function LogoutModal() {
     const modalRef = useRef(null)
-    const { handleToogleLogoutModal } = useChatContext()
-    const { logout } = useLogout()
-    useClickOutside(modalRef, handleToogleLogoutModal)
+    const { closeModal } = useChatContext()
+    const { logout, isLogingOut } = useLogout()
+    useClickOutside(modalRef, closeModal)
 
     return (
-        <ModalLayout modalRef={modalRef}>
-            <p className="text-blue-600 text-lg">
+        <ModalLayout
+            modalRef={modalRef}
+            onClick={() => {
+                logout()
+                closeModal()
+            }}
+            btnConfirm="Wyloguj"
+            isUpdating={isLogingOut}
+        >
+            <p className="text-blue-600 text-xl">
                 Czy napewno chcesz się wylogować?
             </p>
-            <div className="flex justify-evenly mt-6 gap-6">
-                <button
-                    className="py-3 px-6 font-semibold bg-stone-200 rounded-xl border border-stone-300 text-stone-950"
-                    onClick={handleToogleLogoutModal}
-                >
-                    Anuluj
-                </button>
-                <button
-                    className="py-3 px-6 font-semibold bg-blue-500 rounded-xl border border-stone-300 text-stone-50"
-                    onClick={() => {
-                        logout()
-                        handleToogleLogoutModal()
-                    }}
-                >
-                    Wyloguj
-                </button>
-            </div>
         </ModalLayout>
     )
 }

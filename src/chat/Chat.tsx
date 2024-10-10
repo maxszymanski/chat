@@ -4,14 +4,10 @@ import ChatMain from './ChatMain'
 import ChatMessage from './ChatMessage'
 
 import Loader from '../components/Loader'
-import { checkAndAddUser } from '../services/apiAuth'
 
 function Chat() {
-    const { isLoading, user } = useUser()
+    const { isLoading } = useUser()
 
-    if (user) {
-        checkAndAddUser(user?.id, user.email || '', user.user_metadata.username)
-    }
     if (isLoading) return <Loader />
 
     return (

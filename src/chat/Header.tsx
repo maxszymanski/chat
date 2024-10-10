@@ -4,25 +4,30 @@ import Avatar from '../users/Avatar'
 import { useUser } from '../users/useUser'
 
 function Header() {
-    const { handleToogleLogoutModal } = useChatContext()
+    const { openModal } = useChatContext()
     const { user } = useUser()
-    console.log(user)
 
-    const name = user?.user_metadata.name || 'User'
+    const name = user?.user_metadata.username || 'User'
 
     return (
-        <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100">
+        <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100 ">
             <h2 className="text-blue-600 text-xl sm:text-2xl uppercase ">
                 Live Chat
             </h2>
             <div className="flex items-center gap-4">
                 <p className=" text-blue-500 text-lg font-medium">{name}</p>
 
-                <Link to="/account">
-                    <Avatar />
+                <Link
+                    to="/account"
+                    className="border border-stone-200 rounded-full"
+                >
+                    <Avatar image={user?.user_metadata.avatar} />
                 </Link>
 
-                <button className="p-2 ml-1" onClick={handleToogleLogoutModal}>
+                <button
+                    className="p-2 ml-1"
+                    onClick={() => openModal('logout')}
+                >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

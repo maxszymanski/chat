@@ -4,23 +4,29 @@ import { ChatContextType } from '../types/types'
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
 
 function ChatProvider({ children }: { children: React.ReactNode }) {
-    const [isLogoutModelOpen, setIsLogoutModalOpen] = useState(false)
-    // const [isLogoutModelOpen, setIsLogoutModalOpen] = useState({isOpen:false,
-    //     modal: 'logout'
-    // })
+    const [modalState, setModalState] = useState<{
+        isOpen: boolean
+        modalType: string | null
+    }>({
+        isOpen: false,
+        modalType: null,
+    })
 
-    const handleToogleLogoutModal = () => {
-        setIsLogoutModalOpen((is) => !is)
+    const openModal = (modalType: string | null) => {
+        setModalState({
+            isOpen: true,
+            modalType,
+        })
+    }
+    const closeModal = () => {
+        setModalState({
+            isOpen: false,
+            modalType: null,
+        })
     }
 
-    // const handleToogleLogoutModal = () => {
-    //     setIsLogoutModalOpen((is) => !is)
-    // }
-
     return (
-        <ChatContext.Provider
-            value={{ isLogoutModelOpen, handleToogleLogoutModal }}
-        >
+        <ChatContext.Provider value={{ modalState, openModal, closeModal }}>
             {children}
         </ChatContext.Provider>
     )

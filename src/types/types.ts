@@ -12,6 +12,7 @@ export interface MessageType {
 }
 
 export interface ChatContextType {
-    isLogoutModelOpen: boolean
-    handleToogleLogoutModal: () => void
+    modalState: { isOpen: boolean; modalType: string | null }
+    openModal: (modalType: string) => void
+    closeModal: () => void
 }
