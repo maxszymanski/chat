@@ -86,6 +86,12 @@ function ChatMessage() {
                         register('content').ref(e)
                         textareaRef.current = e
                     }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault()
+                            handleSubmit(onSubmit)()
+                        }
+                    }}
                 />
 
                 <button

@@ -12,6 +12,7 @@ import { ChatProvider } from './context/ChatContext'
 import Account from './users/Account'
 import UserProfile from './users/UserProfile'
 import { Toaster } from 'react-hot-toast'
+import PublicProfile from './users/PublicProfile'
 
 const router = createBrowserRouter([
     {
@@ -52,7 +53,10 @@ const router = createBrowserRouter([
                 <Account />
             </ProtectedRoute>
         ),
-        children: [{ path: '', element: <UserProfile /> }],
+        children: [
+            { path: '', element: <UserProfile /> },
+            { path: '/account/:userId', element: <PublicProfile /> },
+        ],
     },
 ])
 

@@ -24,7 +24,9 @@ function ChatHeader() {
                         />
                     </svg>
                 </Link>
-                <Avatar image={friend?.avatar || ''} />
+                <Link to={`/account/${friend?.id}`}>
+                    <Avatar image={friend?.avatar || ''} />
+                </Link>
                 <p className="font-semibold text-lg">
                     {friend?.username || 'Anonim'}
                 </p>

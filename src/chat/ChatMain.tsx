@@ -4,11 +4,15 @@ import Loader from '../components/Loader'
 import { useEffect, useRef } from 'react'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
+import { useFriend } from './useFriend'
 
 function ChatMain() {
     const { isLoading, messages } = useMessages()
     const { user, isLoading: isUserLoading } = useUser()
+    const { friend } = useFriend()
     const messagesEndRef = useRef<HTMLLIElement | null>(null)
+    const userAvatar = user?.user_metadata.avatar || '/default-user.webp'
+    const friendAvatar = friend?.avatar || '/default-user.webp'
 
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
@@ -18,7 +22,7 @@ function ChatMain() {
 
     useEffect(() => {
         if (messages.length > 0) {
-            scrollToBottom() // Przewinięcie natychmiast, bez animacji
+            scrollToBottom()
         }
     }, [messages])
 
@@ -29,7 +33,7 @@ function ChatMain() {
             <ul className="flex flex-col gap-4 justify-end min-h-full ">
                 {messages.map((message, index) => {
                     const isLastFromUser =
-                        index === messages.length - 1 || // Jeśli jest ostatnią wiadomością
+                        index === messages.length - 1 ||
                         messages[index + 1].sender_id !== message.sender_id
 
                     const commonClass = ` p-3 max-w-60  rounded-2xl   w-fit ${
@@ -51,8 +55,12 @@ function ChatMain() {
                             }`}
                         >
                             <img
-                                src="/default-user.webp"
-                                className={`w-7 h-7  rounded-full object-cover   ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
+                                src={
+                                    message.receiver_id === user?.id
+                                        ? friendAvatar
+                                        : userAvatar
+                                }
+                                className={`w-7 h-7  rounded-full object-top object-cover   ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
                             />
                             {isSvg ? (
                                 parse(`${message.content}`)
