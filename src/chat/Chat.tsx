@@ -1,4 +1,4 @@
-import { useUser } from '../users/useUser'
+import { useUser } from '../hooks/useUser'
 import ChatHeader from './ChatHeader'
 import ChatMain from './ChatMain'
 import ChatMessage from './ChatMessage'

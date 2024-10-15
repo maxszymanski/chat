@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useChatContext } from '../context/useChatContext'
 import Avatar from '../users/Avatar'
-import { useUser } from '../users/useUser'
+import { useUser } from '../hooks/useUser'
 
 function Header() {
     const { openModal } = useChatContext()
@@ -15,7 +15,9 @@ function Header() {
                 Live Chat
             </h2>
             <div className="flex items-center gap-4">
-                <p className=" text-blue-500 text-lg font-medium">{name}</p>
+                <p className="hidden md:block text-blue-500 text-lg font-medium">
+                    {name}
+                </p>
 
                 <Link
                     to="/account"

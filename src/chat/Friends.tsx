@@ -1,6 +1,6 @@
 import Loader from '../components/Loader'
 import UserLink from '../users/UserLink'
-import { useUsers } from '../users/useUsers'
+import { useUsers } from '../hooks/useUsers'
 
 function Friends() {
     const { users, isLoading } = useUsers()

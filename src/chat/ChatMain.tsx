@@ -1,10 +1,10 @@
-import { useUser } from '../users/useUser'
-import { useMessages } from './useMessages'
+import { useUser } from '../hooks/useUser'
+import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
 import { useEffect, useRef } from 'react'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
-import { useFriend } from './useFriend'
+import { useFriend } from '../hooks/useFriend'
 
 function ChatMain() {
     const { isLoading, messages } = useMessages()

@@ -1,6 +1,6 @@
 import NoChatSelected from '../components/NoChatSelected'
 import { checkAndAddUser } from '../services/apiAuth'
-import { useUser } from '../users/useUser'
+import { useUser } from '../hooks/useUser'
 import Friends from './Friends'
 import Header from './Header'
 

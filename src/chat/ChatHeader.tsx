@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useFriend } from './useFriend'
+import { useFriend } from '../hooks/useFriend'
 import Avatar from '../users/Avatar'
 
 function ChatHeader() {

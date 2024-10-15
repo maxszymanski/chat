@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getMyMessages } from '../services/apiChat'
-import { useUser } from '../users/useUser'
+import { useUser } from './useUser'
 import { useFriend } from './useFriend'
 import supabase from '../services/supabase'
 import { useEffect } from 'react'

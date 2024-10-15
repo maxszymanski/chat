@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { useUpdateAvatar } from './UseUpdateAvatar'
+import { useUpdateAvatar } from '../hooks/UseUpdateAvatar'
 import Loader from '../components/Loader'
 import { CameraIcon } from '@heroicons/react/24/solid'
 

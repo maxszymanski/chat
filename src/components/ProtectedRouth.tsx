@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { useUser } from '../users/useUser'
+import { useUser } from '../hooks/useUser'
 import Loader from './Loader'
 import ModalManager from './ModalManager'
 

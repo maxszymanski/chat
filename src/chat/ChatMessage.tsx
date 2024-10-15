@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
-import { useUser } from '../users/useUser'
-import { useFriend } from './useFriend'
-import { useSendMessage } from './useSendMessage'
+import { useUser } from '../hooks/useUser'
+import { useFriend } from '../hooks/useFriend'
+import { useSendMessage } from '../hooks/useSendMessage'
 import { MessageType } from '../types/types'
 import { useRef } from 'react'
 

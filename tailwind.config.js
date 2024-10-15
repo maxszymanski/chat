@@ -13,7 +13,7 @@ export default {
                 },
             },
             animation: {
-                visible: 'visible 0.5s  ',
+                visible: 'visible 0.3s  ',
             },
         },
     },

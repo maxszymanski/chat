@@ -143,10 +143,26 @@ export async function getUserFriend(id: string) {
     return data
 }
 
-export async function updateUser(username = '|User') {
+export async function updateUser(username = 'User') {
     const { error } = await supabase.auth.updateUser({
         data: {
             username,
+        },
+    })
+    if (error) throw new Error(error.message)
+}
+export async function updateAbout(aboutme = '') {
+    const { error } = await supabase.auth.updateUser({
+        data: {
+            aboutme,
+        },
+    })
+    if (error) throw new Error(error.message)
+}
+export async function updateStatus(status = '') {
+    const { error } = await supabase.auth.updateUser({
+        data: {
+            status,
         },
     })
     if (error) throw new Error(error.message)

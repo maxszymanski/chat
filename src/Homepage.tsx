@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useUser } from './users/useUser'
+import { useUser } from './hooks/useUser'
 import { useEffect } from 'react'
 import Loader from './components/Loader'
 

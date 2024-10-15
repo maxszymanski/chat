@@ -1,9 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { useUser } from './useUser'
+import { useUser } from '../hooks/useUser'
 import { useEffect } from 'react'
 import { User } from '../types/types'
-import { useSignUp } from './useSignUp'
+import { useSignUp } from '../hooks/useSignUp'
 
 function SignUp() {
     const { signUp, isPending } = useSignUp()
