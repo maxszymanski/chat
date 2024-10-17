@@ -12,6 +12,7 @@ function LogoutModal() {
 
     return (
         <ModalLayout
+            isSettings={false}
             modalRef={modalRef}
             onClick={() => {
                 logout()

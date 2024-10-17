@@ -151,6 +151,12 @@ export async function updateUser(username = 'User') {
     })
     if (error) throw new Error(error.message)
 }
+export async function updatePassword(password: string) {
+    const { error } = await supabase.auth.updateUser({
+        password,
+    })
+    if (error) throw new Error(error.message)
+}
 export async function updateAbout(aboutme = '') {
     const { error } = await supabase.auth.updateUser({
         data: {

@@ -27,7 +27,6 @@ function UserProfile() {
                 </button>
                 <EditAvatat image={image} />
                 <UserAboutMe />
-                {/* <div className="border-t border-gray-200  w-full my-8"></div> */}
             </div>
         </>
     )

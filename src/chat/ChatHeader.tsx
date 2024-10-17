@@ -27,9 +27,7 @@ function ChatHeader() {
                 <Link to={`/account/${friend?.id}`}>
                     <Avatar image={friend?.avatar || ''} />
                 </Link>
-                <p className="font-semibold text-lg">
-                    {friend?.username || 'Anonim'}
-                </p>
+                <p className="font-medium text-lg">{friend?.username || ''}</p>
             </div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +35,7 @@ function ChatHeader() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-7 font-semibold"
+                className="size-7 font-medium"
             >
                 <path
                     strokeLinecap="round"

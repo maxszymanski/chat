@@ -3,6 +3,7 @@ import LogoutModal from './LogoutModal'
 import ModalAbout from './ModalAbout'
 import ModalSettings from './ModalSettings'
 import ModalStatus from './ModalStatus'
+import ModalUpdatePassword from './ModalUpdatePassword'
 import ModalUsername from './ModalUsename'
 
 function ModalManager() {
@@ -14,6 +15,7 @@ function ModalManager() {
             {modalState.modalType === 'about' && <ModalAbout />}
             {modalState.modalType === 'settings' && <ModalSettings />}
             {modalState.modalType === 'status' && <ModalStatus />}
+            {modalState.modalType === 'password' && <ModalUpdatePassword />}
         </>
     )
 }

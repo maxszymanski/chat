@@ -21,7 +21,7 @@ function EditAvatat({ image }: { image: string }) {
     if (isUpdatingAvatar) return <Loader />
 
     return (
-        <div
+        <button
             className="relative border rounded-full  w-36 h-36 xl:w-48 xl:h-48 border-stone-200 cursor-pointer"
             onClick={handleImageClick}
         >
@@ -30,7 +30,7 @@ function EditAvatat({ image }: { image: string }) {
                 className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48"
             />
             <div className="w-10 h-10  rounded-full absolute bottom-0 right-1 border-4 border-gray-200 ">
-                <CameraIcon className="text-white bg-gray-300  rounded-full p-2 pointer-events-none" />
+                <CameraIcon className="text-white bg-gray-300  rounded-full p-2 pointer-events-none w-8 h-8" />
             </div>
             <input
                 type="file"
@@ -39,7 +39,7 @@ function EditAvatat({ image }: { image: string }) {
                 accept="image/*"
                 onChange={handleFileChange}
             />
-        </div>
+        </button>
     )
 }
 

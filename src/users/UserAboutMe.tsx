@@ -16,12 +16,12 @@ function UserAboutMe() {
             <p className="text-3xl  text-blue-900 text-center">{name}</p>
 
             <div className="max-w-72 border border-stone-200 py-3 px-8 rounded-xl bg-slate-100 relative mb-6  w-full">
-                <p className="text-gray-900 text-sm">{status}</p>
+                <p className="text-gray-900 text-sm text-center">{status}</p>
                 <button
                     className="w-9 h-9   rounded-full absolute -top-3 -right-3 bg-slate-100 object-cover object-center border border-stone-200"
                     onClick={() => openModal('status')}
                 >
-                    <ChatBubbleLeftEllipsisIcon className="text-gray-900  p-1.5 " />
+                    <ChatBubbleLeftEllipsisIcon className="text-gray-900  p-1.5 w-9 h-9 " />
                 </button>
             </div>
             <div className="max-w-72 border border-stone-200 py-5  px-8 rounded-xl bg-slate-100 relative w-full text-center min-h-28">
@@ -30,7 +30,7 @@ function UserAboutMe() {
                     className="w-9 h-9   rounded-full absolute -top-3 -right-3 bg-slate-100 object-cover object-center border border-stone-200"
                     onClick={() => openModal('about')}
                 >
-                    <PencilIcon className="text-gray-900  p-1.5 " />
+                    <PencilIcon className="text-gray-900  p-1.5 w-9 h-9" />
                 </button>
             </div>
         </div>

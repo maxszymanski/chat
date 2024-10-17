@@ -29,7 +29,6 @@ function SignUp() {
 
     const onSubmit: SubmitHandler<User> = (newUser) => {
         signUp(newUser, { onSettled: () => reset() })
-        // createUser(userInfo)
     }
 
     return (

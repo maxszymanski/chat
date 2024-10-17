@@ -45,7 +45,10 @@ function ModalSettings() {
                     <PencilIcon className="w-6 h-6 text-blue-900" />
                     Zmień opis
                 </button>
-                <button className="py-3 px-1 flex items-center gap-2 w-full text-left text-lg">
+                <button
+                    className="py-3 px-1 flex items-center gap-2 w-full text-left text-lg"
+                    onClick={() => openModal('password')}
+                >
                     <LockClosedIcon className="w-6 h-6 text-blue-900" />
                     Zmień hasło
                 </button>
