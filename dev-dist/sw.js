@@ -74,31 +74,21 @@ define(['./workbox-b5f7729d'], function (workbox) {
     self.skipWaiting()
     workbox.clientsClaim()
 
-    /**
-     * The precacheAndRoute() method efficiently caches and responds to
-     * requests for URLs in the manifest.
-     * See https://goo.gl/S9QRab
-     */
-    workbox.precacheAndRoute(
-        [
-            {
-                url: 'registerSW.js',
-                revision: '3ca0b8505b4bec776b69afdba2768812',
-            },
-            {
-                url: 'index.html',
-                revision: '0.3u0vruohlq',
-            },
-        ],
-        {}
-    )
-    workbox.cleanupOutdatedCaches()
-    workbox.registerRoute(
-        new workbox.NavigationRoute(
-            workbox.createHandlerBoundToURL('index.html'),
-            {
-                allowlist: [/^\/$/],
-            }
-        )
-    )
-})
+  /**
+   * The precacheAndRoute() method efficiently caches and responds to
+   * requests for URLs in the manifest.
+   * See https://goo.gl/S9QRab
+   */
+  workbox.precacheAndRoute([{
+    "url": "registerSW.js",
+    "revision": "3ca0b8505b4bec776b69afdba2768812"
+  }, {
+    "url": "index.html",
+    "revision": "0.bf5gp5iivg"
+  }], {});
+  workbox.cleanupOutdatedCaches();
+  workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html"), {
+    allowlist: [/^\/$/]
+  }));
+
+}));
