@@ -1,9 +1,10 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getMyMessages } from '../services/apiChat'
-import { useUser } from '../users/useUser'
+import { useUser } from './useUser'
 import { useFriend } from './useFriend'
 import supabase from '../services/supabase'
 import { useEffect } from 'react'
+import { Message } from '../types/types'
 
 export function useMessages() {
     const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
@@ -17,7 +18,7 @@ export function useMessages() {
         isLoading,
         error,
         data: messages = [],
-    } = useQuery({
+    } = useQuery<Message[]>({
         queryKey: ['messages', userId, otherUserId],
         queryFn: () => getMyMessages(userId, otherUserId || ''),
     })
@@ -33,7 +34,9 @@ export function useMessages() {
                     table: 'messages',
                 },
                 () => {
-                    getMyMessages(userId, otherUserId || '')
+                    queryClient.invalidateQueries({
+                        queryKey: ['messages', userId, otherUserId],
+                    })
                 }
             )
             .subscribe()

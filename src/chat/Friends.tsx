@@ -1,6 +1,6 @@
 import Loader from '../components/Loader'
 import UserLink from '../users/UserLink'
-import { useUsers } from '../users/useUsers'
+import { useUsers } from '../hooks/useUsers'
 
 function Friends() {
     const { users, isLoading } = useUsers()
@@ -8,13 +8,8 @@ function Friends() {
     if (isLoading) return <Loader />
 
     return (
-        <div className="h-dvh p-6 pr-16 md:border-r border-stone-200 hidden md:block">
-            <h2 className="text-blue-600 text-2xl uppercase mb-7">Live Chat</h2>
-            <ul>
-                {users?.map((us) => (
-                    <UserLink to={us.id} key={us.id} username={us.username} />
-                ))}
-            </ul>
+        <div className=" h-full p-4  md:border-r border-stone-200  block w-full md:w-96 bg-slate-100">
+            <ul>{users?.map((us) => <UserLink user={us} key={us.id} />)}</ul>
         </div>
     )
 }

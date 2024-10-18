@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
-import { useFriend } from './useFriend'
+import { useFriend } from '../hooks/useFriend'
+import Avatar from '../users/Avatar'
 
 function ChatHeader() {
     const { friend } = useFriend()
 
     return (
-        <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200">
+        <div className="flex w-full justify-between items-center px-5 pt-6 pb-3 border-b border-gray-200 ">
             <div className="flex justify-between items-center gap-4">
-                <Link className="block" to="/chat">
+                <Link className="block md:hidden" to="/chat">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -23,13 +24,10 @@ function ChatHeader() {
                         />
                     </svg>
                 </Link>
-                <img
-                    src="/default-user.webp"
-                    className="w-9 h-9 object-cover rounded-full  bg-stone-50 border border-stone-50  overflow-hidden"
-                />
-                <p className="font-semibold text-lg">
-                    {friend?.username || 'Anonim'}
-                </p>
+                <Link to={`/account/${friend?.id}`}>
+                    <Avatar image={friend?.avatar || ''} />
+                </Link>
+                <p className="font-medium text-lg">{friend?.username || ''}</p>
             </div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +35,7 @@ function ChatHeader() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-7 font-semibold"
+                className="size-7 font-medium"
             >
                 <path
                     strokeLinecap="round"

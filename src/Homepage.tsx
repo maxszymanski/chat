@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useUser } from './users/useUser'
+import { useUser } from './hooks/useUser'
 import { useEffect } from 'react'
 import Loader from './components/Loader'
 
@@ -33,7 +33,7 @@ function Homepage() {
                     to="/signup"
                     className=" block py-3 px-8 bg-blue-200 rounded-2xl text-center font-medium text-lg text-blue-900"
                 >
-                    Sign up
+                    Wpisz się
                 </Link>
             </div>
         </div>

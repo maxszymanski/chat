@@ -1,11 +1,9 @@
 import { Outlet } from 'react-router-dom'
-import Header from '../chat/Header'
-import Friends from '../chat/Friends'
 import { useChatContext } from '../context/useChatContext'
 import { useUser } from '../hooks/useUser'
 import { checkAndAddUser } from '../services/apiAuth'
 
-function AppLayout() {
+function Account() {
     const { modalState } = useChatContext()
     const { user } = useUser()
 
@@ -20,26 +18,13 @@ function AppLayout() {
             user.user_metadata.avatar
         )
     }
-
     return (
         <div
-            className={`${modalState.isOpen ? 'overflow-hidden' : 'overflow-auto'}`}
+            className={`bg-gray-100 font-nunito  min-h-screen flex flex-col ${modalState.isOpen ? 'overflow-hidden h-screen' : 'overflow-auto'} `}
         >
-            <div className="bg-gray-100 font-nunito overflow-hidden h-screen md:hidden z-20">
-                <Outlet />
-            </div>
-            <div className="bg-gray-100 font-nunito  h-screen hidden md:flex ">
-                <div className="flex flex-col h-full w-full  ">
-                    <Header />
-                    <div className="flex flex-1 overflow-hidden">
-                        <Friends />
-
-                        <Outlet />
-                    </div>
-                </div>
-            </div>
+            <Outlet />
         </div>
     )
 }
 
-export default AppLayout
+export default Account

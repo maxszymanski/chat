@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { signUp as signUpApi } from '../services/apiAuth'
 import { useNavigate } from 'react-router-dom'
 import { User } from '../types/types'
+import toast from 'react-hot-toast'
 
 export function useSignUp() {
     const navigate = useNavigate()
@@ -16,7 +17,7 @@ export function useSignUp() {
             navigate('/login')
         },
         onError: () => {
-            console.log('Bład przy wpisywaniu')
+            toast.error('Wystąpił błąd podczas rejestracji')
         },
     })
     return { signUp, isPending }

@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom'
+import Avatar from './Avatar'
+import { UserFriend } from '../types/types'
 
-function UserLink({ to, username }: { to: string; username: string }) {
+function UserLink({ user }: { user: UserFriend }) {
+    const { username, avatar, id, status } = user
     return (
         <li>
-            <Link className="flex items-center gap-6 py-4 " to={`/chat/${to}`}>
-                <img
-                    src="/default-user.webp"
-                    className="w-9 h-9 object-cover rounded-full  bg-stone-50 border border-stone-50  overflow-hidden"
-                />
-
-                <p className="text-2xl text-blue-900">{username}</p>
+            <Link className="flex items-center gap-4 py-4 " to={`/chat/${id}`}>
+                <Avatar type="big" image={avatar || '/default-user.webp'} />
+                <div>
+                    <p className="text-lg text-blue-800 leading-5 font-medium">
+                        {username}
+                    </p>
+                    <p className="text-sm text-gray-500">{status}</p>
+                </div>
             </Link>
         </li>
     )
