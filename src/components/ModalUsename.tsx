@@ -3,6 +3,7 @@ import { useChatContext } from '../context/useChatContext'
 import useClickOutside from '../hooks/useClickOutside'
 import ModalLayout from './ModalLayout'
 import { useUpdateUser } from '../hooks/useUpdateUser'
+import { useMediaQuery } from 'react-responsive'
 
 function ModalUsername() {
     const [inputValue, setInputValue] = useState('')
@@ -18,6 +19,9 @@ function ModalUsername() {
         updateUser(inputValue)
         setInputValue('')
     }
+    const isLarge = useMediaQuery({
+        query: '(min-width: 768px)',
+    })
 
     return (
         <ModalLayout
@@ -25,7 +29,7 @@ function ModalUsername() {
             onClick={handleChangeUsername}
             btnConfirm="Potwierdź"
             isUpdating={isUpdatingName}
-            isSettings
+            isSettings={!isLarge}
         >
             <p className="text-blue-600 text-xl">Wprowadź nazwę użytkownika</p>
             <input

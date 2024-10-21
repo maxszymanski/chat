@@ -5,6 +5,7 @@ import ModalLayout from './ModalLayout'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useUpdatePassword } from '../hooks/useUpdatePassword'
 import { Pass } from '../types/types'
+import { useMediaQuery } from 'react-responsive'
 
 function ModalUpdatePassword() {
     const {
@@ -32,9 +33,13 @@ function ModalUpdatePassword() {
         }
     }
 
+    const isLarge = useMediaQuery({
+        query: '(min-width: 768px)',
+    })
+
     return (
         <ModalLayout
-            isSettings
+            isSettings={!isLarge}
             modalRef={modalRef}
             onClick={() => {
                 handleOutsideSubmit()

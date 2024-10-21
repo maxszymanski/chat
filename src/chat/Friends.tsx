@@ -2,6 +2,8 @@ import Loader from '../components/Loader'
 import UserLink from '../users/UserLink'
 import { useUsers } from '../hooks/useUsers'
 import { ChangeEvent, useMemo, useState } from 'react'
+import UserSearch from '../components/UserSearch'
+import NoUsersSearch from '../components/NoUsersSearch'
 
 function Friends() {
     const { users, isLoading } = useUsers()
@@ -22,19 +24,22 @@ function Friends() {
     }, [users, searchValue])
     if (isLoading) return <Loader />
 
+    const noUsers = filteredUsers.length <= 0
+
     return (
-        <div className=" h-full py-4  md:border-r border-stone-200  block w-full md:max-w-[22rem] bg-slate-100 overflow-y-auto">
-            <div className="max-w-80 mx-auto w-full px-4">
-                <input
-                    className=" w-full p-1.5 mt-2 mb-5 bg-slate-50 rounded-xl px-4 outline-none focus:border-blue-500 border border-blue-100 transition-colors duration-300 hover:border-blue-500 text-blue-900 placeholder:text-stone-950 placeholder:text-sm "
-                    placeholder="Wyszukaj"
-                    value={searchValue}
-                    onChange={handleSearchUser}
-                />
-            </div>
-            <ul className="w-full ">
-                {filteredUsers?.map((us) => <UserLink user={us} key={us.id} />)}
-            </ul>
+        <div
+            className={` h-full py-4  md:border-r border-stone-200  block w-full md:max-w-[22rem] bg-slate-100 overflow-y-auto relative`}
+        >
+            <UserSearch value={searchValue} onClick={handleSearchUser} />
+            {!noUsers ? (
+                <ul className="w-full ">
+                    {filteredUsers?.map((us) => (
+                        <UserLink user={us} key={us.id} />
+                    ))}
+                </ul>
+            ) : (
+                <NoUsersSearch />
+            )}
         </div>
     )
 }
