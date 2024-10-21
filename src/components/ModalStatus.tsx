@@ -5,7 +5,6 @@ import ModalLayout from './ModalLayout'
 import { useUser } from '../hooks/useUser'
 
 import { useUpdateStatus } from '../hooks/useUpdateStatus'
-import { ArrowDownIcon } from '@heroicons/react/24/outline'
 
 const statuses = [
     'Nowy na czacie – poznaj mnie!',
@@ -48,16 +47,16 @@ function ModalStatus() {
                     className={`${isOpen ? ' pb-0' : 'pb-2'} flex  items-center justify-center w-full gap-5 `}
                     onClick={() => setIsOpen((is) => !is)}
                 >
-                    Wybierz status <ArrowDownIcon className="h-5 w-5 " />
+                    Wybierz status
                 </button>
 
                 <ul
                     className={`${isOpen ? 'flex pb-0' : 'hidden'}  w-full py-2  rounded-xl outline-none  transition-colors duration-300   text-blue-900 h-60 overflow-auto flex flex-col items-start text-base `}
                 >
                     {statuses.map((status) => (
-                        <li className="w-full bg-stone-50">
+                        <li className="w-full bg-stone-50" key={status}>
                             <button
-                                className="w-full p-3 text-left border-t border-blue-300 bg-transparent hover:bg-blue-100 focus:bg-blue-100"
+                                className="w-full p-3 text-left border-t border-blue-300 bg-transparent hover:bg-blue-100 focus:bg-blue-200"
                                 value={status}
                                 onClick={(e) =>
                                     setChatStatus(

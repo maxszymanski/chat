@@ -10,7 +10,7 @@ function Settings() {
     const { openModal } = useChatContext()
 
     const defaultClass =
-        'py-3 px-1 flex items-center gap-2 w-full text-left text-lg md:px-12 md:py-5 '
+        'py-3 px-1 flex items-center gap-2 w-full text-left text-lg md:px-12 md:py-5 hover:text-blue-600 duration-300 transition-colors'
 
     return (
         <div className="flex flex-col text-blue-900 items-start divide-y  divide-stone-200 w-full md:py-6 ">
@@ -18,25 +18,25 @@ function Settings() {
                 className={defaultClass}
                 onClick={() => openModal('username')}
             >
-                <UserIcon className="w-6 h-6 text-blue-900" />
+                <UserIcon className="w-6 h-6 " />
                 Zmień imię użytkownika
             </button>
             <button
                 className={defaultClass}
                 onClick={() => openModal('status')}
             >
-                <ChatBubbleLeftEllipsisIcon className="w-6 h-6 text-blue-900" />
+                <ChatBubbleLeftEllipsisIcon className="w-6 h-6 " />
                 Zmień status chatu
             </button>
             <button className={defaultClass} onClick={() => openModal('about')}>
-                <PencilIcon className="w-6 h-6 text-blue-900" />
+                <PencilIcon className="w-6 h-6 " />
                 Zmień opis
             </button>
             <button
                 className={defaultClass}
                 onClick={() => openModal('password')}
             >
-                <LockClosedIcon className="w-6 h-6 text-blue-900" />
+                <LockClosedIcon className="w-6 h-6 " />
                 Zmień hasło
             </button>
         </div>

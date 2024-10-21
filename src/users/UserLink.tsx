@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 function UserLink({ user }: { user: UserFriend }) {
     const { username, avatar, id, status } = user
     const { userId } = useParams()
-    console.log(userId, id)
     const [isActive, setIsActive] = useState(false)
 
     useEffect(() => {

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getUserFriend } from '../services/apiAuth'
 import { useParams } from 'react-router-dom'
+import { UserFriend } from '../types/types'
 
 export function useFriend() {
     const { userId } = useParams()
@@ -8,7 +9,7 @@ export function useFriend() {
         isLoading,
         error,
         data: friend,
-    } = useQuery({
+    } = useQuery<UserFriend>({
         queryKey: ['users', userId],
         queryFn: () => getUserFriend(userId || ''),
     })
