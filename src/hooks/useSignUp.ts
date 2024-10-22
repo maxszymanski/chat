@@ -14,7 +14,8 @@ export function useSignUp() {
                 username,
             }),
         onSuccess: () => {
-            navigate('/login')
+            navigate('/chat')
+            toast.success(`Twoje konto zostało utworzone`)
         },
         onError: () => {
             toast.error('Wystąpił błąd podczas rejestracji')

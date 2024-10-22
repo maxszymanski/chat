@@ -16,7 +16,7 @@ function UserSearch({
                 value={value}
                 onChange={onClick}
             />
-            <MagnifyingGlassIcon className="absolute w-6 h-6 text-slate-500 top-4 right-8" />
+            <MagnifyingGlassIcon className="absolute w-6 h-6 text-slate-500 top-4 right-8 pointer-events-none" />
         </div>
     )
 }

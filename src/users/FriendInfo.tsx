@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
 import { useFriend } from '../hooks/useFriend'
 
@@ -8,15 +9,20 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
     const name = friend?.username || 'User'
     const aboutme = friend?.aboutme || ''
     const status = friend?.status || ''
+    const id = friend?.id
 
     if (isLoading) return <Loader />
 
     return (
-        <div className="  flex flex-col items-center py-16 flex-1">
-            <img
-                src={image || '/default-user.webp'}
-                className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48 "
-            />
+        <div
+            className={`  flex flex-col items-center pt-16 ${inProfile ? 'pb-16' : 'pt-24 md:pt-0'} `}
+        >
+            <Link to={`/account/${id}`}>
+                <img
+                    src={image || '/default-user.webp'}
+                    className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48 "
+                />
+            </Link>
 
             <div className="mt-5 flex flex-col items-center px-12  gap-2">
                 <p className="text-3xl  text-blue-900 mb-3 text-center">
