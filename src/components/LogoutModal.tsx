@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useChatContext } from '../context/useChatContext'
 import useClickOutside from '../hooks/useClickOutside'
-import useLogout from '../users/useLogout'
+import useLogout from '../hooks/useLogout'
 import ModalLayout from './ModalLayout'
 
 function LogoutModal() {

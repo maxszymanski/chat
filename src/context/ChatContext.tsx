@@ -11,6 +11,7 @@ function ChatProvider({ children }: { children: React.ReactNode }) {
         isOpen: false,
         modalType: null,
     })
+    const [activeTab, setActiveTab] = useState('all')
 
     const openModal = (modalType: string | null) => {
         setModalState({
@@ -25,8 +26,24 @@ function ChatProvider({ children }: { children: React.ReactNode }) {
         })
     }
 
+    const handleActiveAll = () => {
+        setActiveTab('all')
+    }
+    const handleActiveFav = () => {
+        setActiveTab('fav')
+    }
+
     return (
-        <ChatContext.Provider value={{ modalState, openModal, closeModal }}>
+        <ChatContext.Provider
+            value={{
+                modalState,
+                openModal,
+                closeModal,
+                activeTab,
+                handleActiveAll,
+                handleActiveFav,
+            }}
+        >
             {children}
         </ChatContext.Provider>
     )

@@ -17,9 +17,10 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
         <div
             className={`  flex flex-col items-center pt-16 ${inProfile ? 'pb-16' : 'pt-24 md:pt-0'} `}
         >
-            <Link to={`/account/${id}`}>
+            <Link to={inProfile ? `/account/picture/${id}` : `/account/${id}`}>
                 <img
                     src={image || '/default-user.webp'}
+                    alt={`Zdjęcie profilowe użytkownika ${name}`}
                     className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48 "
                 />
             </Link>

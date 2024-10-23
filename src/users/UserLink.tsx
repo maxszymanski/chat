@@ -23,7 +23,7 @@ function UserLink({ user }: { user: UserFriend }) {
 
     return (
         <li
-            className={`relative w-full flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-blue-200 hover:bg-blue-200' : 'bg-transparent hover:bg-blue-100'} `}
+            className={`relative w-full justify-center flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-blue-200 hover:bg-blue-200' : 'bg-transparent hover:bg-blue-100'} `}
         >
             <button
                 value={id}

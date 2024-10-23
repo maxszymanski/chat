@@ -1,13 +1,13 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import useLogin from './useLogin'
 import { useUser } from '../hooks/useUser'
 import { useEffect } from 'react'
 import { User } from '../types/types'
+import { useSignUp } from '../hooks/useSignUp'
 import Spinner from '../components/Spinner'
 
-function Login() {
-    const { login, isPending } = useLogin()
+function SignUp() {
+    const { signUp, isPending } = useSignUp()
 
     const { isLoading, isAuthenticated } = useUser()
     const navigate = useNavigate()
@@ -17,6 +17,7 @@ function Login() {
         handleSubmit,
         formState: { errors },
         reset,
+        getValues,
     } = useForm<User>()
 
     useEffect(
@@ -27,20 +28,16 @@ function Login() {
         [isAuthenticated, isLoading, navigate]
     )
 
-    const onSubmit: SubmitHandler<User> = (user) => {
-        login(user, {
-            onSuccess: () => {
-                reset()
-                navigate('/chat', { replace: true })
-            },
-        })
+    const onSubmit: SubmitHandler<User> = (newUser) => {
+        signUp(newUser, { onSettled: () => reset() })
     }
-    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-slate-50  outline-none focus:border-blue-500 border border-blue-100 transition-colors duration-300 hover:border-blue-500 text-blue-900 placeholder:text-slate-600`
+
+    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-slate-50  outline-none focus:border-blue-500 border border-blue-100 transition-colors duration-300 hover:border-blue-500 text-blue-900 placeholder:text-slate-600 ${errors.email ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center py-8 bg-slate-50">
+        <div className="min-h-screen flex flex-col items-center justify-center py-8  bg-gradient-to-bl from-slate-100 to-sky-100">
             <h2 className="text-blue-400 text-5xl text-center uppercase">
-                Zaloguj się
+                Wpisz się
             </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -52,7 +49,6 @@ function Login() {
                         placeholder="Email"
                         id="email"
                         type="email"
-                        disabled={isPending}
                         {...register('email', {
                             required: 'Nieprawidłowy adres email',
                             pattern: {
@@ -64,6 +60,23 @@ function Login() {
                     {errors.email && (
                         <p className="text-xs text-red-500 mt-0.5 ml-2">
                             {errors.email.message}
+                        </p>
+                    )}
+                </div>
+                <div>
+                    <input
+                        className={`${commonClass}  ${errors.username ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        placeholder="Imię"
+                        id="username"
+                        type="text"
+                        disabled={isPending}
+                        {...register('username', {
+                            required: 'Prosze podać imię',
+                        })}
+                    />
+                    {errors.username && (
+                        <p className="text-xs text-red-500 mt-0.5 ml-2">
+                            {errors.username.message}
                         </p>
                     )}
                 </div>
@@ -89,18 +102,38 @@ function Login() {
                         </p>
                     )}
                 </div>
-                <div className=" flex flex-col gap-4 mt-4">
+                <div>
+                    <input
+                        className={`${commonClass}  ${errors.passwordConfirm ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        type="password"
+                        id="passwordConfirm"
+                        placeholder="Powtórz hasło"
+                        disabled={isPending}
+                        {...register('passwordConfirm', {
+                            required: 'Podane hasła nie są zgodne',
+                            validate: (value) =>
+                                value === getValues().password ||
+                                'Hasła nie są identyczne',
+                        })}
+                    />
+                    {errors.passwordConfirm && (
+                        <p className="text-xs text-red-500 mt-0.5 ml-2">
+                            {errors.passwordConfirm.message}
+                        </p>
+                    )}
+                </div>
+                <div className="w-full flex flex-col gap-4 mt-4">
                     <button
-                        className="w-full p-2 bg-blue-400 rounded-2xl font-medium text-blue-50 transition-colors duration-300 hover:bg-blue-500 flex items-center justify-center gap-2 "
+                        className="p-2 bg-blue-400 rounded-2xl font-medium text-blue-50 transition-colors duration-300 hover:bg-blue-500 flex items-center justify-center gap-2 "
                         disabled={isPending}
                     >
-                        {isPending && <Spinner />} Zaloguj
+                        {isPending && <Spinner />} Wpisz się
                     </button>
                     <Link
-                        to="/signup"
-                        className=" block p-2 bg-blue-200 rounded-2xl text-center font-medium transition-colors duration-300 hover:bg-blue-300"
+                        to="/login"
+                        className="block p-2 bg-blue-200 rounded-2xl text-center font-medium transition-colors duration-300 hover:bg-blue-300"
                     >
-                        Wpisz się
+                        Logowanie
                     </Link>
                 </div>
             </form>
@@ -108,4 +141,4 @@ function Login() {
     )
 }
 
-export default Login
+export default SignUp

@@ -15,6 +15,9 @@ export interface ChatContextType {
     modalState: { isOpen: boolean; modalType: string | null }
     openModal: (modalType: string) => void
     closeModal: () => void
+    activeTab: string
+    handleActiveFav: () => void
+    handleActiveAll: () => void
 }
 export interface UserFriend {
     id: string

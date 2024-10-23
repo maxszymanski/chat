@@ -25,10 +25,10 @@ function AppLayout() {
         <div
             className={`${modalState.isOpen ? 'overflow-hidden' : 'overflow-auto'}`}
         >
-            <div className="bg-gray-100 font-nunito overflow-hidden h-screen md:hidden z-20">
+            <div className="bg-gray-100 font-nunito overflow-hidden h-screen sm:hidden z-20">
                 <Outlet />
             </div>
-            <div className="bg-gray-100 font-nunito  h-screen hidden md:flex ">
+            <div className="bg-gray-100 font-nunito  h-screen hidden sm:flex ">
                 <div className="flex flex-col h-full w-full  ">
                     <Header />
                     <div className="flex flex-1 overflow-hidden">

@@ -20,7 +20,7 @@ function ChatMessage() {
         watch,
     } = useForm<MessageType>()
 
-    const inputValue = watch('content')
+    const inputValue = watch('content')?.trim()
 
     const like = `<svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -32,10 +32,13 @@ function ChatMessage() {
                 </svg>`
 
     const onSubmit = ({ content }: { content: string }) => {
+        const trimmedContent = content.trim()
+        if (!trimmedContent) return
+
         const newMessage = {
             sender_id: user?.id || '1',
             receiver_id: userId || '2',
-            content: content,
+            content: trimmedContent,
         }
 
         sendMessage(newMessage, {

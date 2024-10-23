@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useUser } from './hooks/useUser'
+import { useUser } from '../hooks/useUser'
 import { useEffect } from 'react'
-import Loader from './components/Loader'
+import Loader from '../components/Loader'
 
 function Homepage() {
     const { isAuthenticated, isLoading } = useUser()
@@ -18,7 +18,7 @@ function Homepage() {
     if (isLoading) return <Loader />
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50">
+        <div className="min-h-screen flex flex-col items-center justify-center  bg-gradient-to-bl from-slate-100 to-sky-100">
             <h2 className="text-blue-400 text-6xl text-center uppercase">
                 Live Chat
             </h2>

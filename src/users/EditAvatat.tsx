@@ -27,6 +27,7 @@ function EditAvatat({ image }: { image: string }) {
         >
             <img
                 src={image || '/default-user.webp'}
+                alt={`Zdjęcie profilowe użytkownika`}
                 className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48"
             />
             <div className="w-10 h-10  rounded-full absolute bottom-0 right-1 border-4 border-gray-200 ">

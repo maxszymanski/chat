@@ -3,15 +3,12 @@ import ChatHeader from './ChatHeader'
 import ChatMain from './ChatMain'
 import ChatMessage from './ChatMessage'
 
-import Loader from '../components/Loader'
-
 function Chat() {
     const { isLoading } = useUser()
 
-    if (isLoading) return <Loader />
-
     return (
         <div className="h-full flex flex-col w-full ">
+            {isLoading && <p>Loading...</p>}
             <ChatHeader />
             <ChatMain />
             <ChatMessage />

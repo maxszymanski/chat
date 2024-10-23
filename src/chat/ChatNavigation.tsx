@@ -5,7 +5,7 @@ import Header from './Header'
 function ChatNavigation() {
     return (
         <>
-            <div className="md:hidden h-full">
+            <div className="sm:hidden h-full">
                 <Header />
                 <div className=" h-full overflow-auto pb-20">
                     <Friends />

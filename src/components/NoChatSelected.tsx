@@ -1,6 +1,6 @@
 function NoChatSelected() {
     return (
-        <main className=" md:flex justify-center items-center flex-1  text-center hidden ">
+        <main className=" sm:flex justify-center items-center flex-1  text-center hidden ">
             <div>
                 <p className="text-xl text-blue-500 py-5">
                     "Nic tu się nie dzieje...{' '}

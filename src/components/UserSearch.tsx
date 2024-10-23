@@ -9,7 +9,7 @@ function UserSearch({
     onClick: (e: ChangeEvent) => void
 }) {
     return (
-        <div className="max-w-80 mx-auto w-full px-4 relative">
+        <div className="max-w-md  mx-auto w-full px-4 relative">
             <input
                 className=" w-full p-1.5 mt-2 mb-5 bg-slate-50 rounded-xl px-4 outline-none focus:border-blue-500 border border-blue-100 transition-colors duration-300 hover:border-blue-500 text-blue-900 placeholder:text-slate-600 placeholder:text-sm "
                 placeholder="Wyszukaj"
