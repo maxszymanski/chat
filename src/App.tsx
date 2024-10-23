@@ -14,6 +14,8 @@ import UserProfile from './users/UserProfile'
 import { Toaster } from 'react-hot-toast'
 import PublicProfile from './users/PublicProfile'
 import FullPageImage from './users/FullPageImage'
+import AllFriends from './chat/AllFriends'
+import FavoriteFriends from './chat/FavoriteFriends'
 
 const router = createBrowserRouter([
     {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: '',
                 element: <ChatNavigation />,
+                // children: [
+                //     { path: '', element: <AllFriends /> },
+                //     { path: '/chat/favorite', element: <FavoriteFriends /> },
+                // ],
             },
             {
                 path: '/chat/:userId',

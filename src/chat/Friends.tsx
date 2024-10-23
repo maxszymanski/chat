@@ -6,15 +6,24 @@ import UserSearch from '../components/UserSearch'
 import NoUsersSearch from '../components/NoUsersSearch'
 import FriendsTabs from '../components/FriendsTabs'
 import { useChatContext } from '../context/useChatContext'
+import FavoriteFriends from './FavoriteFriends'
+import { useFavoriteUsers } from '../hooks/useFavoriteUsers'
+import { Outlet } from 'react-router-dom'
+import AllFriends from './AllFriends'
 
 function Friends() {
     const { users, isLoading } = useUsers()
+    const { favUsers, isLoadingFavUsers } = useFavoriteUsers()
     const [searchValue, setSearchValue] = useState('')
     const { activeTab } = useChatContext()
+
+    const allUsersOpen = activeTab === 'all'
+    const favUsersOpen = activeTab === 'fav'
 
     const handleSearchUser = (e: ChangeEvent) => {
         setSearchValue((e.target as HTMLInputElement).value)
     }
+    console.log(allUsersOpen)
 
     const filteredUsers = useMemo(() => {
         return searchValue === ''
@@ -25,10 +34,8 @@ function Friends() {
                       .includes(searchValue.toLowerCase())
               )
     }, [users, searchValue])
-    if (isLoading) return <Loader />
+    if (isLoading || isLoadingFavUsers) return <Loader />
 
-    const allUsersOpen = activeTab === 'all'
-    const favUsersOpen = activeTab === 'fav'
     const noUsers = filteredUsers.length <= 0
 
     return (
@@ -38,21 +45,8 @@ function Friends() {
             <UserSearch value={searchValue} onClick={handleSearchUser} />
             <FriendsTabs />
 
-            {allUsersOpen && (
-                <ul className="w-full ">
-                    {filteredUsers?.map((us) => (
-                        <UserLink user={us} key={us.id} />
-                    ))}
-                </ul>
-            )}
-            {favUsersOpen && (
-                // <ul className="w-full ">
-                //     {filteredUsers?.map((us) => (
-                //         <UserLink user={us} key={us.id} />
-                //     ))}
-                // </ul>
-                <p>Fav open</p>
-            )}
+            {allUsersOpen && <AllFriends />}
+            {favUsersOpen && <FavoriteFriends />}
             {noUsers && <NoUsersSearch />}
         </div>
     )

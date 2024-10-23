@@ -97,6 +97,7 @@ export async function signUp({ email = '', password = '', username = 'User' }) {
                 status: 'Nowy na czacie – poznaj mnie!',
                 aboutme:
                     'Hej! Jeszcze się tutaj urządzam, ale zapraszam do kontaktu! ',
+                friends: [],
             },
         },
     })
@@ -128,6 +129,29 @@ export async function getAllUsers() {
 
     return data
 }
+export async function getFriendsUsers() {
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
+    const currentUserFriends = session?.user?.user_metadata?.friends || []
+
+    if (currentUserFriends.length === 0) {
+        return []
+    }
+
+    const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .in('id', currentUserFriends)
+        .order('username', { ascending: true })
+
+    if (error) {
+        console.error('Error fetching messages:', error)
+        return []
+    }
+
+    return data
+}
 
 export async function getUserFriend(id: string) {
     const { data, error } = await supabase
@@ -143,7 +167,7 @@ export async function getUserFriend(id: string) {
     return data
 }
 
-export async function updateUser(username = 'User') {
+export async function updateUser(username = '') {
     const { error } = await supabase.auth.updateUser({
         data: {
             username,
@@ -172,6 +196,20 @@ export async function updateStatus(status = '') {
         },
     })
     if (error) throw new Error(error.message)
+}
+
+export async function updateUserFriends(newFriend: string) {
+    const userDate = await getCurrentUser()
+    const currentFriends = userDate?.user_metadata?.friends || []
+
+    if (!currentFriends.includes(newFriend)) {
+        const { error } = await supabase.auth.updateUser({
+            data: {
+                friends: [...currentFriends, newFriend],
+            },
+        })
+        if (error) throw new Error(error.message)
+    }
 }
 
 export async function updateAvatar(avatarFile: File) {

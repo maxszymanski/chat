@@ -6,10 +6,16 @@ import {
     HeartIcon,
     UserIcon,
 } from '@heroicons/react/24/outline'
+import { useUpdateUserFriends } from '../hooks/useUpdateUserFriends'
 
 function LinksModal({ id, onClick }: { id: string; onClick: () => void }) {
     const modalRef = useRef(null)
     useClickOutside(modalRef, onClick)
+    const { updateFriends } = useUpdateUserFriends()
+
+    const addToFavorite = () => {
+        updateFriends(id, { onSuccess: () => onClick() })
+    }
 
     return (
         <div
@@ -30,8 +36,11 @@ function LinksModal({ id, onClick }: { id: string; onClick: () => void }) {
                 <ChatBubbleLeftRightIcon className="size-6 text-sky-500" />
                 Przejdź do chatu
             </Link>
-            <button className="flex items-center gap-2 w-full p-4  hover:bg-blue-100  transition-colors duration-300 text-blue-950">
-                <HeartIcon className="size-6 text-red-500" />
+            <button
+                onClick={addToFavorite}
+                className="flex items-center gap-2 w-full p-4  hover:bg-blue-100  transition-colors duration-300 text-blue-950"
+            >
+                <HeartIcon className="size-6 text-red-500 pointer-events-none" />
                 Dodaj do ulubionych
             </button>
         </div>
