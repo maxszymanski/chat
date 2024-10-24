@@ -198,7 +198,7 @@ export async function updateStatus(status = '') {
     if (error) throw new Error(error.message)
 }
 
-export async function updateUserFriends(newFriend: string) {
+export async function addUserFriends(newFriend: string) {
     const userDate = await getCurrentUser()
     const currentFriends = userDate?.user_metadata?.friends || []
 
@@ -210,6 +210,21 @@ export async function updateUserFriends(newFriend: string) {
         })
         if (error) throw new Error(error.message)
     }
+}
+export async function removeUserFriends(friendId: string) {
+    const userDate = await getCurrentUser()
+    const currentFriends = userDate?.user_metadata?.friends || []
+
+    const updatedFriends = currentFriends.filter(
+        (id: string) => id !== friendId
+    )
+
+    const { error } = await supabase.auth.updateUser({
+        data: {
+            friends: updatedFriends,
+        },
+    })
+    if (error) throw new Error(error.message)
 }
 
 export async function updateAvatar(avatarFile: File) {

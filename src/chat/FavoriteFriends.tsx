@@ -2,11 +2,11 @@ import { useMemo } from 'react'
 import Loader from '../components/Loader'
 import { useFavoriteUsers } from '../hooks/useFavoriteUsers'
 import UserLink from '../users/UserLink'
+import NoUsersSearch from '../components/NoUsersSearch'
+import NoFavUsers from '../components/NoFavUsers'
 
-function FavoriteFriends() {
+function FavoriteFriends({ searchValue }: { searchValue: string }) {
     const { favUsers, isLoadingFavUsers } = useFavoriteUsers()
-
-    const searchValue = ''
 
     const filteredUsers = useMemo(() => {
         return searchValue === ''
@@ -18,9 +18,11 @@ function FavoriteFriends() {
               )
     }, [favUsers, searchValue])
 
-    if (isLoadingFavUsers) return <Loader />
+    const noUsers = filteredUsers.length == 0 && favUsers.length > 0
 
-    console.log(favUsers)
+    if (isLoadingFavUsers) return <Loader />
+    if (noUsers) return <NoUsersSearch />
+    if (favUsers.length == 0) return <NoFavUsers />
 
     return (
         <ul className="w-full ">

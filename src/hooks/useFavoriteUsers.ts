@@ -11,5 +11,6 @@ export function useFavoriteUsers() {
         queryKey: ['users'],
         queryFn: () => getFriendsUsers(),
     })
+
     return { isLoadingFavUsers, error, favUsers }
 }

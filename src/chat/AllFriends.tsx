@@ -2,10 +2,10 @@ import { useMemo } from 'react'
 import Loader from '../components/Loader'
 import { useUsers } from '../hooks/useUsers'
 import UserLink from '../users/UserLink'
+import NoUsersSearch from '../components/NoUsersSearch'
 
-function AllFriends() {
+function AllFriends({ searchValue }: { searchValue: string }) {
     const { users, isLoading } = useUsers()
-    const searchValue = ''
 
     const filteredUsers = useMemo(() => {
         return searchValue === ''
@@ -16,13 +16,22 @@ function AllFriends() {
                       .includes(searchValue.toLowerCase())
               )
     }, [users, searchValue])
+    const noUsers = filteredUsers.length <= 0
 
     if (isLoading) return <Loader />
 
     return (
-        <ul className="w-full ">
-            {filteredUsers?.map((us) => <UserLink user={us} key={us.id} />)}
-        </ul>
+        <>
+            {!noUsers ? (
+                <ul className="w-full ">
+                    {filteredUsers?.map((us) => (
+                        <UserLink user={us} key={us.id} />
+                    ))}
+                </ul>
+            ) : (
+                <NoUsersSearch />
+            )}
+        </>
     )
 }
 

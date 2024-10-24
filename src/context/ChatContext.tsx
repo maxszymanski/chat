@@ -11,7 +11,7 @@ function ChatProvider({ children }: { children: React.ReactNode }) {
         isOpen: false,
         modalType: null,
     })
-    const [activeTab, setActiveTab] = useState('all')
+    const [activeTab, setActiveTab] = useState('fav')
 
     const openModal = (modalType: string | null) => {
         setModalState({

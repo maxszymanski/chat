@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useChatContext } from '../context/useChatContext'
 
 function FriendsTabs() {
@@ -13,24 +12,12 @@ function FriendsTabs() {
                 >
                     Kontakty
                 </button>
-                {/* <Link
-                    to="/chat"
-                    className={`w-full text-center py-1 text-lg  font-medium  rounded-full transition-colors duration-300 ${activeTab === 'all' ? 'text-blue-50 bg-blue-500' : ''}`}
-                >
-                    Kontakty
-                </Link> */}
                 <button
                     onClick={handleActiveFav}
                     className={`w-full py-1 text-lg  font-medium  rounded-full transition-colors duration-300 ${activeTab === 'fav' ? 'text-blue-50 bg-blue-500' : ''}`}
                 >
                     Ulubione
                 </button>
-                {/* <Link
-                    to="/chat/favorite"
-                    className={`w-full text-center py-1 text-lg  font-medium  rounded-full transition-colors duration-300 ${activeTab === 'fav' ? 'text-blue-50 bg-blue-500' : ''}`}
-                >
-                    Ulubione
-                </Link> */}
             </div>
         </div>
     )
