@@ -19,14 +19,14 @@ function UserProfile() {
     return (
         <>
             <UserHeader />
-            <div className="py-16 relative flex-1 md:flex  md:justify-evenly md:gap-10 ">
+            <div className="py-6 relative flex-1 flex md:flex-row flex-col items-center justify-center  md:justify-evenly md:gap-10 ">
                 <button
                     className="absolute top-3 right-4 w-12 h-12 text-blue-900 p-2 md:hidden"
                     onClick={() => openModal('settings')}
                 >
                     <Cog8ToothIcon />
                 </button>
-                <div className="flex flex-col items-center md:justify-center">
+                <div className="flex flex-col items-center md:justify-center gap-2">
                     <EditAvatat image={image} />
                     <UserAboutMe />
                 </div>

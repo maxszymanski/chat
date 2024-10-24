@@ -1,39 +1,18 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import useClickOutside from '../hooks/useClickOutside'
-import {
-    ChatBubbleLeftRightIcon,
-    HeartIcon,
-    UserIcon,
-} from '@heroicons/react/24/outline'
-import { useAddUserFriends } from '../hooks/useAddUserFriends'
-import { useRemoveUserFriends } from '../hooks/useRemoveFavUser'
+import { ChatBubbleLeftRightIcon, UserIcon } from '@heroicons/react/24/outline'
 
-import { useUser } from '../hooks/useUser'
-import { HeartIcon as SolidHeart } from '@heroicons/react/24/solid'
+import AddRemoveFav from './AddRemoveFav'
 
 function LinksModal({ id, onClick }: { id: string; onClick: () => void }) {
-    const { addFriends } = useAddUserFriends()
-    const { removeFriends } = useRemoveUserFriends()
-    const { user } = useUser()
-
-    const friends: string[] = user?.user_metadata?.friends || []
-    const isFav = friends.includes(id)
-
     const modalRef = useRef(null)
     useClickOutside(modalRef, onClick)
-
-    const addToFavorite = () => {
-        addFriends(id, { onSuccess: () => onClick() })
-    }
-    const removeFromFavorite = () => {
-        removeFriends(id, { onSuccess: () => onClick() })
-    }
 
     return (
         <div
             ref={modalRef}
-            className={` absolute top-[3.3rem] left-8 bg-slate-100 border border-sky-200 z-[1000] rounded-xl overflow-hidden`}
+            className={` absolute bottom-[2rem] left-12 bg-slate-100 border border-sky-200 z-[1000] rounded-t-xl rounded-br-xl overflow-hidden`}
         >
             <Link
                 to={`/account/${id}`}
@@ -49,17 +28,7 @@ function LinksModal({ id, onClick }: { id: string; onClick: () => void }) {
                 <ChatBubbleLeftRightIcon className="size-6 text-sky-500" />
                 Przejdź do chatu
             </Link>
-            <button
-                onClick={!isFav ? addToFavorite : removeFromFavorite}
-                className="flex items-center gap-2 w-full p-4  hover:bg-blue-100  transition-colors duration-300 text-blue-950"
-            >
-                {isFav ? (
-                    <SolidHeart className="size-6 text-red-500 pointer-events-none" />
-                ) : (
-                    <HeartIcon className="size-6 text-red-500 pointer-events-none" />
-                )}
-                {isFav ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
-            </button>
+            <AddRemoveFav id={id} onClick={onClick} />
         </div>
     )
 }

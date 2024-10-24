@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Loader from '../components/Loader'
 import { useFriend } from '../hooks/useFriend'
+import AddRemoveFav from '../components/AddRemoveFav'
 
 function FriendInfo({ inProfile }: { inProfile: boolean }) {
     const { friend, isLoading } = useFriend()
@@ -9,14 +10,17 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
     const name = friend?.username || 'User'
     const aboutme = friend?.aboutme || ''
     const status = friend?.status || ''
-    const id = friend?.id
+    const id = friend?.id || '1'
 
     if (isLoading) return <Loader />
 
     return (
         <div
-            className={`  flex flex-col items-center pt-16 ${inProfile ? 'pb-16' : 'pt-24 md:pt-0'} `}
+            className={` flex-1 flex flex-col items-center justify-center py-6   ${inProfile ? '' : 'py-2  md:pt-0'} `}
         >
+            <div className=" border border-stone-200 bg-slate-100 text-gray-900 mb-10 rounded-xl overflow-hidden ">
+                <AddRemoveFav id={id} onClick={() => {}} />
+            </div>
             <Link to={inProfile ? `/account/picture/${id}` : `/account/${id}`}>
                 <img
                     src={image || '/default-user.webp'}

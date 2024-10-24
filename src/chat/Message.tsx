@@ -49,7 +49,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                     target="_blank"
                     rel="noopener"
                     to={message.content}
-                    className={commonClass}
+                    className={`${commonClass} underline`}
                 >
                     {message.content}
                 </Link>

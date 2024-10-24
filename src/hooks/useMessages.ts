@@ -6,13 +6,13 @@ import supabase from '../services/supabase'
 import { useEffect } from 'react'
 import { Message } from '../types/types'
 
-export function useMessages() {
+export function useMessages(listUser: string | null = null) {
     const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
     const { user } = useUser()
-    const { userId: otherUser } = useFriend()
+    const { friendId: otherUser } = useFriend()
     const userId = user ? user.id : ANONYMOUS_USER_ID
     const queryClient = useQueryClient()
-    const otherUserId = otherUser ? otherUser : ANONYMOUS_USER_ID
+    const otherUserId = listUser ? listUser : otherUser
 
     const {
         isLoading,
@@ -20,7 +20,7 @@ export function useMessages() {
         data: messages = [],
     } = useQuery<Message[]>({
         queryKey: ['messages', userId, otherUserId],
-        queryFn: () => getMyMessages(userId, otherUserId || ''),
+        queryFn: () => getMyMessages(userId, otherUserId || ANONYMOUS_USER_ID),
     })
 
     useEffect(() => {

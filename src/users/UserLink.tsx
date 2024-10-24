@@ -10,6 +10,8 @@ function UserLink({ user }: { user: UserFriend }) {
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
 
+    // const { messages } = useMessages(id)
+
     useEffect(() => {
         setIsActive(userId === id)
     }, [userId, id])
@@ -45,9 +47,6 @@ function UserLink({ user }: { user: UserFriend }) {
                     <p className="text-sm text-gray-500">{status}</p>
                 </div>
             </Link>
-            {/* <button className="p-1.5 text-blue-950 border-transparent border hover:text-blue-00 hover:border-blue-800 transition-colors duration-300 rounded-md hidden md:block">
-                <EllipsisVerticalIcon className="size-6 pointer-events-none" />
-            </button> */}
         </li>
     )
 }

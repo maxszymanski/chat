@@ -12,10 +12,10 @@ function UserAboutMe() {
     const status = user?.user_metadata.status || ''
 
     return (
-        <div className="mt-5 flex flex-col items-center px-12  gap-3 w-full">
-            <p className="text-3xl  text-blue-900 text-center">{name}</p>
+        <div className="mt-5 flex flex-col items-center px-12  gap-1 w-full">
+            <p className="text-3xl  text-blue-900 text-center mb-5">{name}</p>
 
-            <div className="max-w-72 border border-stone-200 py-3 px-8 rounded-xl bg-slate-100 relative mb-6  w-full">
+            <div className="max-w-72 border border-stone-200 py-3 px-8 rounded-xl bg-slate-100 relative mb-8  w-full">
                 <p className="text-gray-900 text-sm text-center">{status}</p>
                 <button
                     className="w-9 h-9   rounded-full absolute -top-3 -right-3 bg-slate-100 object-cover object-center border border-stone-200 hover:text-blue-600 duration-300 transition-colors text-gray-900"
