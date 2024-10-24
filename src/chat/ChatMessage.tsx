@@ -9,7 +9,7 @@ import { HandThumbUpIcon } from '@heroicons/react/16/solid'
 
 function ChatMessage() {
     const { user } = useUser()
-    const { userId } = useFriend()
+    const { friendId } = useFriend()
     const { sendMessage } = useSendMessage()
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const {
@@ -37,7 +37,7 @@ function ChatMessage() {
 
         const newMessage = {
             sender_id: user?.id || '1',
-            receiver_id: userId || '2',
+            receiver_id: friendId || '2',
             content: trimmedContent,
         }
 
@@ -53,7 +53,7 @@ function ChatMessage() {
         if (!inputValue) {
             const newMessage = {
                 sender_id: user?.id || '1',
-                receiver_id: userId || '2',
+                receiver_id: friendId || '2',
                 content: like,
             }
 
