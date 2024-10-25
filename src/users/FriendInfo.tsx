@@ -16,7 +16,7 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
         <div
             className={` relative flex-1 flex flex-col items-center justify-center py-6   ${inProfile ? '' : 'py-2  md:pt-0'} `}
         >
-            {isLoading ? (
+            {isLoading && inProfile ? (
                 <Loader />
             ) : (
                 <>
