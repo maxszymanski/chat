@@ -7,8 +7,8 @@ import { Message as MessageType } from '../types/types'
 import { useFriend } from '../hooks/useFriend'
 
 function Message({ message, index }: { message: MessageType; index: number }) {
-    const { messages, isLoading } = useMessages()
-    const { user, isLoading: isUserLoading } = useUser()
+    const { messages } = useMessages()
+    const { user } = useUser()
     const { friend } = useFriend()
 
     const userAvatar = user?.user_metadata.avatar || '/default-user.webp'
@@ -25,7 +25,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
     const isSvg = message.content.startsWith('<svg')
     const isLink = message.content.startsWith('http')
 
-    if (isLoading || isUserLoading) return <Loader />
+    // if (isLoading || isUserLoading) return <Loader />
 
     return (
         <li

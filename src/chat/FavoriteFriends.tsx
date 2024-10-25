@@ -8,7 +8,7 @@ import NoFavUsers from '../components/NoFavUsers'
 function FavoriteFriends({ searchValue }: { searchValue: string }) {
     const { favUsers, isLoadingFavUsers } = useFavoriteUsers()
 
-    const filteredUsers = useMemo(() => {
+    const filteredFavUsers = useMemo(() => {
         return searchValue === ''
             ? favUsers
             : favUsers.filter((user) =>
@@ -18,7 +18,7 @@ function FavoriteFriends({ searchValue }: { searchValue: string }) {
               )
     }, [favUsers, searchValue])
 
-    const noUsers = filteredUsers.length == 0 && favUsers.length > 0
+    const noUsers = filteredFavUsers.length == 0 && favUsers.length > 0
 
     if (isLoadingFavUsers) return <Loader />
     if (noUsers) return <NoUsersSearch />
@@ -26,7 +26,7 @@ function FavoriteFriends({ searchValue }: { searchValue: string }) {
 
     return (
         <ul className="w-full ">
-            {filteredUsers?.map((us) => <UserLink user={us} key={us.id} />)}
+            {filteredFavUsers?.map((us) => <UserLink user={us} key={us.id} />)}
         </ul>
     )
 }

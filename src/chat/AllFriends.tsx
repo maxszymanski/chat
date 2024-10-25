@@ -18,18 +18,17 @@ function AllFriends({ searchValue }: { searchValue: string }) {
     }, [users, searchValue])
     const noUsers = filteredUsers.length <= 0
 
+    if (!isLoading && noUsers) return <NoUsersSearch />
     if (isLoading) return <Loader />
 
     return (
         <>
-            {!noUsers ? (
+            {!noUsers && (
                 <ul className="w-full ">
                     {filteredUsers?.map((us) => (
                         <UserLink user={us} key={us.id} />
                     ))}
                 </ul>
-            ) : (
-                <NoUsersSearch />
             )}
         </>
     )

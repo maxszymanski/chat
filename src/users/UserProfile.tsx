@@ -14,7 +14,7 @@ function UserProfile() {
 
     const image = user?.user_metadata.avatar || '/default-user.webp'
 
-    if (isLoading) return <Loader />
+    // if (isLoading) return <Loader />
 
     return (
         <>

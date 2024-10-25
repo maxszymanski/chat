@@ -8,7 +8,7 @@ function Header() {
     const { openModal } = useChatContext()
     const { user } = useUser()
 
-    const name = user?.user_metadata.username || 'User'
+    const name = user?.user_metadata.username || ''
 
     return (
         <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100 ">
