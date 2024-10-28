@@ -32,7 +32,7 @@ function SignUp() {
         signUp(newUser, { onSettled: () => reset() })
     }
 
-    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-slate-50  outline-none focus:border-sky-500 border border-sky-100 transition-colors duration-300 hover:border-sky-500 text-sky-900 placeholder:text-slate-600 ${errors.email ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`
+    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-slate-50  outline-none focus:border-sky-500 border  transition-colors duration-300 hover:border-sky-500 text-sky-900 placeholder:text-slate-600 `
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center py-8  bg-gradient-to-bl from-slate-100 to-sky-100">
@@ -41,11 +41,11 @@ function SignUp() {
             </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="px-8 py-12 flex flex-col gap-4 bg-sky-100 rounded-2xl mt-12"
+                className="px-8 py-12 flex flex-col gap-4 bg-sky-100 rounded-2xl mt-12 border border-sky-200"
             >
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.email ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`${commonClass}  ${errors.email ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                         placeholder="Email"
                         id="email"
                         type="email"
@@ -65,7 +65,7 @@ function SignUp() {
                 </div>
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.username ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`${commonClass}  ${errors.username ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                         placeholder="Imię"
                         id="username"
                         type="text"
@@ -82,7 +82,7 @@ function SignUp() {
                 </div>
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.password ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`${commonClass}  ${errors.password ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                         placeholder="Hasło"
                         id="password"
                         type="password"
@@ -104,7 +104,7 @@ function SignUp() {
                 </div>
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.passwordConfirm ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`${commonClass}  ${errors.passwordConfirm ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                         type="password"
                         id="passwordConfirm"
                         placeholder="Powtórz hasło"
