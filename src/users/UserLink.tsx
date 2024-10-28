@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react'
 import LinksModal from '../components/LinksModal'
 import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
+import { format, parseISO, isToday } from 'date-fns'
+import { pl } from 'date-fns/locale'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
     const { username, avatar, id, status } = user
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
-
     const { messages, isLoading } = useMessages(id)
 
     useEffect(() => {
@@ -28,9 +29,20 @@ function UserLink({ user }: { user: UserFriend }) {
     if (isLoading) return <Loader />
 
     const lastMessage = messages[messages.length - 1]?.content
+    const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
+    const isMessageNotSeen =
+        messages[messages.length - 1]?.read_status === false &&
+        fromFriendMessage
 
     const isSvg = lastMessage?.startsWith('<svg')
-    const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
+    const messageCreated = messages[messages.length - 1]?.created_at
+
+    const date = messageCreated && parseISO(messageCreated)
+
+    const today = date && isToday(date)
+
+    const formattedDay = date && format(date, 'EEEE', { locale: pl })
+    const formattedTime = date && format(date, 'HH:mm')
 
     return (
         <li
@@ -46,20 +58,30 @@ function UserLink({ user }: { user: UserFriend }) {
             </button>
             {openModal && <LinksModal id={id} onClick={closeLinkModal} />}
             <Link
-                className={`flex items-center gap-4 py-3 flex-1  px-2 `}
+                className={`flex items-center gap-4 py-3 flex-1  px-2 justify-between `}
                 to={`/chat/${id}`}
             >
-                <div>
-                    <p className="text-lg text-blue-800 leading-5 font-medium">
+                <div className="flex flex-col gap-1.5">
+                    <p
+                        className={`text-lg text-blue-800  leading-5  ${isMessageNotSeen ? 'font-bold' : ' font-medium'}`}
+                    >
                         {username}
                     </p>
                     {lastMessage ? (
-                        <p className={`text-sm mt-1 text-gray-600 `}>
-                            {!fromFriendMessage && (
-                                <span className="mr-1  ">Ty:</span>
-                            )}
-                            {isSvg ? '👍' : `${lastMessage}`}
-                        </p>
+                        <div
+                            className={`flex items-center justify-between gap-2 w-full flex-1 text-sm   ${isMessageNotSeen ? 'font-bold text-gray-950' : ' font-normal text-gray-600'}`}
+                        >
+                            {' '}
+                            <p className="overflow-hidden w-fit">
+                                {!fromFriendMessage && (
+                                    <span className="mr-1  ">Ty:</span>
+                                )}
+                                {isSvg ? '👍' : `${lastMessage}`}
+                            </p>
+                            <p className="text-xs text-nowrap  w-max">
+                                {today ? formattedTime : `${formattedDay}`}
+                            </p>
+                        </div>
                     ) : (
                         <p className="text-sm mt-1 text-gray-500">{status}</p>
                     )}

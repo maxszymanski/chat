@@ -21,6 +21,8 @@ function MessagesList() {
         }
     }, [messages])
 
+    // const lastMessageId = messages[messages.length - 1].id
+
     return (
         <ul className="flex flex-col gap-4 justify-end min-h-full ">
             {isLoading && <Spinner />}

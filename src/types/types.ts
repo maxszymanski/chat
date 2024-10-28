@@ -33,6 +33,7 @@ export interface Message {
     id: string
     receiver_id: string
     sender_id: string
+    read_status: boolean
 }
 export interface Pass {
     password: string
