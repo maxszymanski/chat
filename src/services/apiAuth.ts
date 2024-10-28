@@ -161,7 +161,7 @@ export async function getUserFriend(id: string) {
         .single()
 
     if (error) {
-        console.error(error)
+        console.error(error.message)
         throw new Error('Nie znaleziono użytkownika')
     }
     return data

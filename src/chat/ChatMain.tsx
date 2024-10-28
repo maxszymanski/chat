@@ -1,8 +1,6 @@
 import EmptyChat from '../components/EmptyChat'
 import Loader from '../components/Loader'
 
-import Spinner from '../components/Spinner'
-
 import { useMessages } from '../hooks/useMessages'
 import MessagesList from './MessagesList'
 

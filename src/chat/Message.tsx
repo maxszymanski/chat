@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useMessages } from '../hooks/useMessages'
 import { useUser } from '../hooks/useUser'
 import parse from 'html-react-parser'
-import Loader from '../components/Loader'
+
 import { Message as MessageType } from '../types/types'
 import { useFriend } from '../hooks/useFriend'
 
@@ -25,8 +25,6 @@ function Message({ message, index }: { message: MessageType; index: number }) {
     const isSvg = message.content.startsWith('<svg')
     const isLink = message.content.startsWith('http')
 
-    // if (isLoading || isUserLoading) return <Loader />
-
     return (
         <li
             key={message.id}
@@ -43,7 +41,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                 className={`w-7 h-7  rounded-full object-top object-cover   ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
             />
             {isSvg ? (
-                parse(`${message.content}`)
+                <span className="size-10">{parse(`${message.content}`)}</span>
             ) : isLink ? (
                 <Link
                     target="_blank"

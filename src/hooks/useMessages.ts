@@ -9,10 +9,10 @@ import { Message } from '../types/types'
 export function useMessages(listUser: string | null = null) {
     const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
     const { user } = useUser()
-    const { friendId: otherUser } = useFriend()
+    const { friendId: otherUser } = useFriend(listUser)
     const userId = user ? user.id : ANONYMOUS_USER_ID
     const queryClient = useQueryClient()
-    const otherUserId = listUser ? listUser : otherUser
+    const otherUserId = listUser || otherUser || ANONYMOUS_USER_ID
 
     const {
         isLoading,

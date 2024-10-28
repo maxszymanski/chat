@@ -5,8 +5,9 @@ import { UserFriend } from '../types/types'
 
 export function useFriend(id: string | null = null) {
     const { userId } = useParams()
+    const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
 
-    const friendId = id ? id : userId
+    const friendId = id || userId || ANONYMOUS_USER_ID
     const {
         isLoading,
         error,

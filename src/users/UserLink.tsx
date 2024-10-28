@@ -3,6 +3,8 @@ import Avatar from './Avatar'
 import { UserFriend } from '../types/types'
 import { useEffect, useState } from 'react'
 import LinksModal from '../components/LinksModal'
+import { useMessages } from '../hooks/useMessages'
+import Loader from '../components/Loader'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
@@ -10,7 +12,7 @@ function UserLink({ user }: { user: UserFriend }) {
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
 
-    // const { messages } = useMessages(id)
+    const { messages, isLoading } = useMessages(id)
 
     useEffect(() => {
         setIsActive(userId === id)
@@ -22,6 +24,13 @@ function UserLink({ user }: { user: UserFriend }) {
     const closeLinkModal = () => {
         setOpenModal(false)
     }
+
+    if (isLoading) return <Loader />
+
+    const lastMessage = messages[messages.length - 1]?.content
+
+    const isSvg = lastMessage?.startsWith('<svg')
+    const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
 
     return (
         <li
@@ -44,7 +53,16 @@ function UserLink({ user }: { user: UserFriend }) {
                     <p className="text-lg text-blue-800 leading-5 font-medium">
                         {username}
                     </p>
-                    <p className="text-sm text-gray-500">{status}</p>
+                    {lastMessage ? (
+                        <p className={`text-sm mt-1 text-gray-600 `}>
+                            {!fromFriendMessage && (
+                                <span className="mr-1  ">Ty:</span>
+                            )}
+                            {isSvg ? '👍' : `${lastMessage}`}
+                        </p>
+                    ) : (
+                        <p className="text-sm mt-1 text-gray-500">{status}</p>
+                    )}
                 </div>
             </Link>
         </li>

@@ -25,9 +25,9 @@ function AllFriends({ searchValue }: { searchValue: string }) {
         <>
             {!noUsers && (
                 <ul className="w-full ">
-                    {filteredUsers?.map((us) => (
-                        <UserLink user={us} key={us.id} />
-                    ))}
+                    {filteredUsers?.map((friend) => {
+                        return <UserLink user={friend} key={friend.id} />
+                    })}
                 </ul>
             )}
         </>
