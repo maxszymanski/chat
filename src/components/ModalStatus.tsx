@@ -41,8 +41,8 @@ function ModalStatus() {
             isUpdating={isUpdatingStatus}
             isSettings={false}
         >
-            <p className="text-blue-600 text-xl">Ustal status chatu!</p>
-            <div className="mt-6 w-full pt-2 bg-blue-50 rounded-xl outline-none border-blue-300 border  transition-colors duration-300   text-blue-900 ">
+            <p className="text-sky-600 text-xl">Ustal status chatu!</p>
+            <div className="mt-6 w-full pt-2 bg-sky-50 rounded-xl outline-none border-sky-300 border  transition-colors duration-300   text-sky-900 ">
                 <button
                     className={`${isOpen ? ' pb-0' : 'pb-2'} flex  items-center justify-center w-full gap-5 `}
                     onClick={() => setIsOpen((is) => !is)}
@@ -51,12 +51,12 @@ function ModalStatus() {
                 </button>
 
                 <ul
-                    className={`${isOpen ? 'flex pb-0' : 'hidden'}  w-full py-2  rounded-xl outline-none  transition-colors duration-300   text-blue-900 h-60 overflow-auto flex flex-col items-start text-base `}
+                    className={`${isOpen ? 'flex pb-0' : 'hidden'}  w-full py-2  rounded-xl outline-none  transition-colors duration-300   text-sky-900 h-60 overflow-auto flex flex-col items-start text-base `}
                 >
                     {statuses.map((status) => (
                         <li className="w-full bg-stone-50" key={status}>
                             <button
-                                className="w-full p-3 text-left border-t border-blue-300 bg-transparent hover:bg-blue-100 focus:bg-blue-200"
+                                className="w-full p-3 text-left border-t border-sky-300 bg-transparent hover:bg-sky-100 focus:bg-sky-200"
                                 value={status}
                                 onClick={(e) =>
                                     setChatStatus(

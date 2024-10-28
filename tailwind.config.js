@@ -5,6 +5,7 @@ export default {
         extend: {
             fontFamily: {
                 nunito: 'Nunito Sans Variable, sans-serif',
+                atma: 'Atma, system-ui',
             },
             keyframes: {
                 visible: {
@@ -17,5 +18,5 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 }

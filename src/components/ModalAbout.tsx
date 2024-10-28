@@ -28,7 +28,7 @@ function ModalAbout() {
             isUpdating={isUpdatingAboutme}
             isSettings={false}
         >
-            <p className="text-blue-600 text-xl">Opowiedz coś o sobię!</p>
+            <p className="text-sky-600 text-xl">Opowiedz coś o sobię!</p>
 
             <textarea
                 maxLength={200}

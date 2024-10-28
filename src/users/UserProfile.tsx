@@ -14,14 +14,14 @@ function UserProfile() {
 
     const image = user?.user_metadata.avatar || '/default-user.webp'
 
-    // if (isLoading) return <Loader />
+    if (isLoading) return <Loader />
 
     return (
         <>
             <UserHeader />
             <div className="py-6 relative flex-1 flex md:flex-row flex-col items-center justify-center  md:justify-evenly md:gap-10 ">
                 <button
-                    className="absolute top-3 right-4 w-12 h-12 text-blue-900 p-2 md:hidden"
+                    className="absolute top-3 right-4 w-12 h-12 text-sky-900 p-2 md:hidden"
                     onClick={() => openModal('settings')}
                 >
                     <Cog8ToothIcon />

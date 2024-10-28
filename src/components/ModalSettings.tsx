@@ -18,7 +18,7 @@ function ModalSettings() {
             isUpdating={false}
             isSettings={false}
         >
-            <p className="text-blue-600 text-2xl mb-5">Ustawienia</p>
+            <p className="text-sky-600 text-2xl mb-5">Ustawienia</p>
             <Settings />
         </ModalLayout>
     )

@@ -24,7 +24,7 @@ function AddRemoveFav({ id, onClick }: { id: string; onClick: () => void }) {
     return (
         <button
             onClick={!isFav ? addToFavorite : removeFromFavorite}
-            className="flex items-center gap-2 w-full p-4  hover:bg-blue-100  transition-colors duration-300 text-blue-950"
+            className="flex items-center gap-2 w-full p-4  hover:bg-sky-100  transition-colors duration-300 text-sky-950"
         >
             {isPending && <Spinner />}
             {isFav && !isPending && (

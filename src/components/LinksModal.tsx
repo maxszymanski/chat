@@ -16,14 +16,14 @@ function LinksModal({ id, onClick }: { id: string; onClick: () => void }) {
         >
             <Link
                 to={`/account/${id}`}
-                className="flex items-center gap-2 w-full p-4 hover:bg-blue-100  transition-colors duration-300 text-blue-950 border-b border-sky-200"
+                className="flex items-center gap-2 w-full p-4 hover:bg-sky-100  transition-colors duration-300 text-sky-950 border-b border-sky-200"
             >
                 <UserIcon className="size-6 " />
                 Przejdź do profilu
             </Link>
             <Link
                 to={`/chat/${id}`}
-                className="flex items-center gap-2 w-full p-4 hover:bg-blue-100  transition-colors duration-300 text-blue-950 border-b border-sky-200"
+                className="flex items-center gap-2 w-full p-4 hover:bg-sky-100  transition-colors duration-300 text-sky-950 border-b border-sky-200"
             >
                 <ChatBubbleLeftRightIcon className="size-6 text-sky-500" />
                 Przejdź do chatu

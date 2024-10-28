@@ -18,7 +18,7 @@ function UserHeader() {
             <button className="block p-2" onClick={handleNavigate}>
                 <ChevronLeftIcon className="size-5 " />
             </button>
-            <p className="text-blue-600 text-xl sm:text-2xl uppercase ">
+            <p className="text-sky-500 font-atma text-2xl sm:text-3xl ">
                 Live Chat
             </p>
         </div>

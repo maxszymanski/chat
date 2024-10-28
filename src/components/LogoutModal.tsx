@@ -21,7 +21,7 @@ function LogoutModal() {
             btnConfirm="Wyloguj"
             isUpdating={isLogingOut}
         >
-            <p className="text-blue-600 text-xl">
+            <p className="text-sky-600 text-xl">
                 Czy napewno chcesz się wylogować?
             </p>
         </ModalLayout>

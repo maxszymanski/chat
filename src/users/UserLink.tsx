@@ -7,6 +7,7 @@ import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
 import { format, parseISO, isToday } from 'date-fns'
 import { pl } from 'date-fns/locale'
+import { useUpdateMessageStatus } from '../hooks/useUpdateMessageStatus'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
@@ -14,6 +15,7 @@ function UserLink({ user }: { user: UserFriend }) {
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
     const { messages, isLoading } = useMessages(id)
+    const { updateMessageStatus } = useUpdateMessageStatus()
 
     useEffect(() => {
         setIsActive(userId === id)
@@ -28,11 +30,16 @@ function UserLink({ user }: { user: UserFriend }) {
 
     if (isLoading) return <Loader />
 
+    const lastMessageId = messages[messages.length - 1]?.id
+
     const lastMessage = messages[messages.length - 1]?.content
     const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
     const isMessageNotSeen =
         messages[messages.length - 1]?.read_status === false &&
         fromFriendMessage
+    const isFriendSeeMessage =
+        messages[messages.length - 1]?.read_status === true &&
+        !fromFriendMessage
 
     const isSvg = lastMessage?.startsWith('<svg')
     const messageCreated = messages[messages.length - 1]?.created_at
@@ -44,9 +51,16 @@ function UserLink({ user }: { user: UserFriend }) {
     const formattedDay = date && format(date, 'EEEE', { locale: pl })
     const formattedTime = date && format(date, 'HH:mm')
 
+    const handleUpdateReadStatus = () => {
+        if (isMessageNotSeen) {
+            const messageToUpdate = { id: lastMessageId, read_status: true }
+            updateMessageStatus(messageToUpdate)
+        }
+    }
+
     return (
         <li
-            className={`relative w-full justify-center flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-blue-200 hover:bg-blue-200' : 'bg-transparent hover:bg-blue-100'} `}
+            className={`relative w-full justify-center flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
         >
             <button
                 value={id}
@@ -60,10 +74,11 @@ function UserLink({ user }: { user: UserFriend }) {
             <Link
                 className={`flex items-center gap-4 py-3 flex-1  px-2 justify-between `}
                 to={`/chat/${id}`}
+                onClick={handleUpdateReadStatus}
             >
                 <div className="flex flex-col gap-1.5">
                     <p
-                        className={`text-lg text-blue-800  leading-5  ${isMessageNotSeen ? 'font-bold' : ' font-medium'}`}
+                        className={`text-lg text-sky-950  leading-5  ${isMessageNotSeen ? 'font-bold' : ' font-medium'}`}
                     >
                         {username}
                     </p>
@@ -86,6 +101,12 @@ function UserLink({ user }: { user: UserFriend }) {
                         <p className="text-sm mt-1 text-gray-500">{status}</p>
                     )}
                 </div>
+                {isFriendSeeMessage && (
+                    <Avatar
+                        type="mini"
+                        image={avatar || '/default-user.webp'}
+                    />
+                )}
             </Link>
         </li>
     )

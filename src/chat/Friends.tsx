@@ -18,7 +18,8 @@ function Friends() {
 
     return (
         <div
-            className={` h-full py-4  sm:border-r border-stone-200  block w-full sm:max-w-[22rem] bg-slate-100 overflow-y-auto relative`}
+            className={` h-full py-4  sm:border-r border-stone-200  block w-full sm:max-w-[24rem] bg-slate-100 overflow-y-auto relative scrollbar-thin
+        scrollbar-thumb-sky-300 scrollbar-track-sky-100`}
         >
             <UserSearch value={searchValue} onClick={handleSearchUser} />
             <FriendsTabs />

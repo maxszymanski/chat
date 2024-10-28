@@ -19,7 +19,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
         messages[index + 1].sender_id !== message.sender_id
 
     const commonClass = ` p-3 max-w-60  rounded-2xl   w-fit ${
-        message.receiver_id === user?.id ? 'bg-white ' : 'bg-blue-300 '
+        message.receiver_id === user?.id ? 'bg-white ' : 'bg-sky-300 '
     }`
 
     const isSvg = message.content.startsWith('<svg')
@@ -41,7 +41,9 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                 className={`w-7 h-7  rounded-full object-top object-cover   ${isLastFromUser ? 'opacity-100' : 'opacity-0'} `}
             />
             {isSvg ? (
-                <span className="size-10">{parse(`${message.content}`)}</span>
+                <span className="size-10 text-sky-300">
+                    {parse(`${message.content}`)}
+                </span>
             ) : isLink ? (
                 <Link
                     target="_blank"

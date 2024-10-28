@@ -30,7 +30,7 @@ function ModalLayout({
                 {children}
                 <div className="flex justify-evenly mt-10 gap-2  ">
                     <button
-                        className="py-3 px-6 font-semibold bg-stone-200 rounded-xl border border-stone-300 text-stone-950 outline-none focus:border-blue-500   transition-colors duration-300 hover:border-stone-500 "
+                        className="py-3 px-6 font-semibold bg-sky-100 rounded-xl border border-sky-200 text-sky-900 outline-none focus:border-sky-700   transition-colors duration-300 hover:bg-sky-50 "
                         onClick={
                             isSettings
                                 ? () => openModal('settings')
@@ -42,7 +42,7 @@ function ModalLayout({
                     </button>
 
                     <button
-                        className="py-3 px-6 font-semibold bg-blue-500 rounded-xl border border-stone-300 w-fit text-stone-50 outline-none focus:bg-blue-700  transition-colors duration-300 hover:bg-blue-600 min-h-[50px] min-w-[122px] disabled:bg-blue-400 flex gap-1 items-center justify-center"
+                        className="py-3 px-6 font-semibold bg-sky-400 rounded-xl border border-sky-300 w-fit text-stone-50 outline-none focus:bg-sky-600  transition-colors duration-300 hover:bg-sky-500 min-h-[50px] min-w-[122px] disabled:bg-sky-300 flex gap-1 items-center justify-center"
                         onClick={onClick}
                         disabled={isUpdating}
                     >

@@ -47,7 +47,7 @@ function ModalUpdatePassword() {
             btnConfirm="Zmień"
             isUpdating={isUpdatingPassword}
         >
-            <p className="text-blue-600 text-xl mb-7">Zmień swoje hasło</p>
+            <p className="text-sky-600 text-xl mb-7">Zmień swoje hasło</p>
             <form
                 ref={formRef}
                 onSubmit={handleSubmit(onSubmit)}
@@ -55,7 +55,7 @@ function ModalUpdatePassword() {
             >
                 <div className="w-full">
                     <input
-                        className={`p-2 bg-blue-100 rounded-xl px-4 outline-none focus:border-blue-500 border  transition-colors duration-300 hover:border-blue-500 text-lg text-blue-900 placeholder:text-stone-950 placeholder:text-sm w-full mb-1 ${errors.password ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`p-2 bg-sky-100 rounded-xl px-4 outline-none focus:border-sky-500 border  transition-colors duration-300 hover:border-sky-500 text-lg text-sky-900 placeholder:text-stone-950 placeholder:text-sm w-full mb-1 ${errors.password ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                         placeholder="Hasło"
                         id="password"
                         type="password"
@@ -86,7 +86,7 @@ function ModalUpdatePassword() {
                         id="passwordConfirm"
                         placeholder="Powtórz hasło"
                         disabled={isUpdatingPassword}
-                        className={`p-2 bg-blue-100 rounded-xl px-4 outline-none focus:border-blue-500 border  transition-colors duration-300 hover:border-blue-500 text-lg text-blue-900 placeholder:text-stone-950 placeholder:text-sm w-full mb-1 ${errors.passwordConfirm ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-transparent'}`}
+                        className={`p-2 bg-sky-100 rounded-xl px-4 outline-none focus:border-sky-500 border  transition-colors duration-300 hover:border-sky-500 text-lg text-sky-900 placeholder:text-stone-950 placeholder:text-sm w-full mb-1 ${errors.passwordConfirm ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
                     />
                     {errors.passwordConfirm && (
                         <p className="text-xs text-red-500">

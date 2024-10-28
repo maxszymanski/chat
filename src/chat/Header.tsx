@@ -11,27 +11,27 @@ function Header() {
     const name = user?.user_metadata.username || ''
 
     return (
-        <header className="border-b border-gray-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100 ">
+        <header className="border-b border-sky-200 p-4 md:p-6 flex items-center justify-between gap-4 bg-slate-100 ">
             <Link
                 to="/chat"
-                className="block text-blue-600 text-xl sm:text-2xl uppercase "
+                className="font-atma font-medium block text-sky-500 text-2xl sm:text-3xl  "
             >
                 Live Chat
             </Link>
             <div className="flex items-center gap-4">
-                <p className="hidden md:block text-blue-500 text-lg font-medium">
+                <p className="hidden md:block text-sky-500 text-lg font-medium">
                     {name}
                 </p>
 
                 <Link
                     to="/account"
-                    className="border border-stone-200 rounded-full"
+                    className="border border-sky-200 rounded-full"
                 >
                     <Avatar image={user?.user_metadata.avatar} />
                 </Link>
 
                 <button
-                    className="p-2 ml-1 text-blue-600"
+                    className="p-2 ml-1 text-sky-500"
                     onClick={() => openModal('logout')}
                 >
                     <ArrowLeftEndOnRectangleIcon className="size-6" />

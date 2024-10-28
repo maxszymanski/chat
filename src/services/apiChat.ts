@@ -31,3 +31,14 @@ export async function createMessage(newMessage: MessageType) {
 
     return data
 }
+
+export async function updateReadStatus({ id = '', read_status = false }) {
+    const { error } = await supabase
+        .from('messages')
+        .update({ read_status })
+        .eq('id', id)
+        .select()
+    if (error) throw new Error(error.message)
+}
+
+// 0ad88916-59fd-4582-822f-241f78193a3c

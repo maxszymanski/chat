@@ -38,7 +38,7 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
                     </Link>
 
                     <div className="mt-5 flex flex-col items-center px-12  gap-2">
-                        <p className="text-3xl  text-blue-900 mb-3 text-center">
+                        <p className="text-3xl  text-sky-900 mb-3 text-center">
                             {name}
                         </p>
                         <div className="max-w-80 border border-stone-200 py-3 px-8 rounded-xl bg-slate-100 relative mb-6  min-w-full text-center">

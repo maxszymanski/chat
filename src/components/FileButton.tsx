@@ -8,7 +8,7 @@ function FileButton({
     onClick: () => void
 }) {
     return (
-        <button onClick={onClick} className="p-1 text-blue-600">
+        <button onClick={onClick} className="p-1 text-sky-500">
             {children}
         </button>
     )
