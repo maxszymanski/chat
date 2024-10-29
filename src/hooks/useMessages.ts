@@ -24,22 +24,41 @@ export function useMessages(listUser: string | null = null) {
     })
 
     useEffect(() => {
-        const channel = supabase
-            .channel('messages-change')
-            .on(
-                'postgres_changes',
-                {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'messages',
-                },
-                () => {
+        const channel = supabase.channel('messages-change')
+
+        channel.on(
+            'postgres_changes',
+            {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'messages',
+            },
+            () => {
+                queryClient.invalidateQueries({
+                    queryKey: ['messages', userId, otherUserId],
+                })
+            }
+        )
+
+        channel.on(
+            'postgres_changes',
+            {
+                event: 'UPDATE',
+                schema: 'public',
+                table: 'messages',
+            },
+            (payload) => {
+                if (
+                    payload.new.receiver_id === userId ||
+                    payload.new.sender_id === userId
+                ) {
                     queryClient.invalidateQueries({
                         queryKey: ['messages', userId, otherUserId],
                     })
                 }
-            )
-            .subscribe()
+            }
+        )
+        channel.subscribe()
 
         return () => {
             supabase.removeChannel(channel)

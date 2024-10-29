@@ -48,7 +48,8 @@ function UserLink({ user }: { user: UserFriend }) {
 
     const today = date && isToday(date)
 
-    const formattedDay = date && format(date, 'EEEE', { locale: pl })
+    const formattedDay =
+        date && format(date, 'EEEE', { locale: pl }).slice(0, 3)
     const formattedTime = date && format(date, 'HH:mm')
 
     const handleUpdateReadStatus = () => {
@@ -60,9 +61,10 @@ function UserLink({ user }: { user: UserFriend }) {
 
     return (
         <li
-            className={`relative w-full justify-center flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
+            className={`relative w-full    flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
         >
             <button
+                className="shrink-0"
                 value={id}
                 onClick={(e) =>
                     openLinkModal((e.target as HTMLButtonElement).value)
@@ -72,11 +74,11 @@ function UserLink({ user }: { user: UserFriend }) {
             </button>
             {openModal && <LinksModal id={id} onClick={closeLinkModal} />}
             <Link
-                className={`flex items-center gap-4 py-3 flex-1  px-2 justify-between `}
+                className={`flex items-center gap-4 py-3  w-4/5 grow-0  px-2 justify-between `}
                 to={`/chat/${id}`}
                 onClick={handleUpdateReadStatus}
             >
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-1.5 max-w-full">
                     <p
                         className={`text-lg text-sky-950  leading-5  ${isMessageNotSeen ? 'font-bold' : ' font-medium'}`}
                     >
@@ -84,28 +86,32 @@ function UserLink({ user }: { user: UserFriend }) {
                     </p>
                     {lastMessage ? (
                         <div
-                            className={`flex items-center justify-between gap-2 w-full flex-1 text-sm   ${isMessageNotSeen ? 'font-bold text-gray-950' : ' font-normal text-gray-600'}`}
+                            className={`flex items-center flex-1 gap-3  text-sm   ${isMessageNotSeen ? 'font-bold text-gray-950' : ' font-normal text-gray-600'}`}
                         >
                             {' '}
-                            <p className="overflow-hidden w-fit">
+                            <p className="overflow-hidden break-words whitespace-nowrap overflow-ellipsis ">
                                 {!fromFriendMessage && (
                                     <span className="mr-1  ">Ty:</span>
                                 )}
                                 {isSvg ? '👍' : `${lastMessage}`}
                             </p>
-                            <p className="text-xs text-nowrap  w-max">
+                            <p className="text-xs text-nowrap  ">
                                 {today ? formattedTime : `${formattedDay}`}
                             </p>
                         </div>
                     ) : (
-                        <p className="text-sm mt-1 text-gray-500">{status}</p>
+                        <p className="text-sm mt-1 text-gray-500 overflow-hidden break-words whitespace-nowrap overflow-ellipsis ">
+                            {status}
+                        </p>
                     )}
                 </div>
                 {isFriendSeeMessage && (
-                    <Avatar
-                        type="mini"
-                        image={avatar || '/default-user.webp'}
-                    />
+                    <div className="shrink-0">
+                        <Avatar
+                            type="mini"
+                            image={avatar || '/default-user.webp'}
+                        />
+                    </div>
                 )}
             </Link>
         </li>

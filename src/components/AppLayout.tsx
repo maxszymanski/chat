@@ -23,9 +23,9 @@ function AppLayout() {
 
     return (
         <div
-            className={`${modalState.isOpen ? 'overflow-hidden' : 'overflow-auto'}`}
+            className={`${modalState.isOpen ? 'overflow-hidden' : 'overflow-y-auto'}`}
         >
-            <div className="bg-gray-100 font-nunito overflow-hidden h-screen sm:hidden z-20">
+            <div className="bg-gray-100 font-nunito overflow-hidden h-screen sm:hidden z-20 w-full">
                 <Outlet />
             </div>
             <div className="bg-gray-100 font-nunito  h-screen hidden sm:flex ">
