@@ -14,7 +14,7 @@ export function useFriend(id: string | null = null) {
         data: friend,
     } = useQuery<UserFriend>({
         queryKey: ['users', friendId],
-        queryFn: () => getUserFriend(friendId || ''),
+        queryFn: () => getUserFriend(friendId),
     })
     return { isLoading, error, friend, friendId }
 }

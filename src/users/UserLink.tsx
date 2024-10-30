@@ -7,15 +7,14 @@ import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
 import { format, parseISO, isToday } from 'date-fns'
 import { pl } from 'date-fns/locale'
-import { useUpdateMessageStatus } from '../hooks/useUpdateMessageStatus'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
+
     const { username, avatar, id, status } = user
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
     const { messages, isLoading } = useMessages(id)
-    const { updateMessageStatus } = useUpdateMessageStatus()
 
     useEffect(() => {
         setIsActive(userId === id)
@@ -30,8 +29,6 @@ function UserLink({ user }: { user: UserFriend }) {
 
     if (isLoading) return <Loader />
 
-    const lastMessageId = messages[messages.length - 1]?.id
-
     const lastMessage = messages[messages.length - 1]?.content
     const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
     const isMessageNotSeen =
@@ -40,9 +37,9 @@ function UserLink({ user }: { user: UserFriend }) {
     const isFriendSeeMessage =
         messages[messages.length - 1]?.read_status === true &&
         !fromFriendMessage
+    const messageCreated = messages[messages.length - 1]?.created_at
 
     const isSvg = lastMessage?.startsWith('<svg')
-    const messageCreated = messages[messages.length - 1]?.created_at
 
     const date = messageCreated && parseISO(messageCreated)
 
@@ -51,13 +48,6 @@ function UserLink({ user }: { user: UserFriend }) {
     const formattedDay =
         date && format(date, 'EEEE', { locale: pl }).slice(0, 3)
     const formattedTime = date && format(date, 'HH:mm')
-
-    const handleUpdateReadStatus = () => {
-        if (isMessageNotSeen) {
-            const messageToUpdate = { id: lastMessageId, read_status: true }
-            updateMessageStatus(messageToUpdate)
-        }
-    }
 
     return (
         <li
@@ -76,7 +66,6 @@ function UserLink({ user }: { user: UserFriend }) {
             <Link
                 className={`flex items-center gap-4 py-3  w-4/5 grow-0  px-2 justify-between `}
                 to={`/chat/${id}`}
-                onClick={handleUpdateReadStatus}
             >
                 <div className="flex flex-col gap-1.5 max-w-full">
                     <p

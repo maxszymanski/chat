@@ -9,6 +9,7 @@ export function useSendMessage() {
             queryClient.invalidateQueries({
                 queryKey: ['messages'],
             })
+            queryClient.refetchQueries({ queryKey: ['messages'] })
         },
         onError: (err) => console.log(err),
     })

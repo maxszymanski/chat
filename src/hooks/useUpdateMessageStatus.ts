@@ -7,11 +7,11 @@ export function useUpdateMessageStatus() {
     const { mutate: updateMessageStatus } = useMutation({
         mutationFn: ({ id, read_status }: MessageToUpdate) =>
             updateReadStatus({ id, read_status }),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({
+        onSuccess: () => {
+            queryClient.invalidateQueries({
                 queryKey: ['messages'],
             })
-            await queryClient.refetchQueries({ queryKey: ['messages'] })
+            queryClient.refetchQueries({ queryKey: ['messages'] })
         },
         onError: () =>
             console.error('Wystąpił bład podczas zmiany statusu wiadomości'),
