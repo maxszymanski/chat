@@ -25,7 +25,7 @@ function Header() {
 
                 <Link
                     to="/account"
-                    className="border border-sky-200 rounded-full"
+                    className="border-2 border-sky-200 duration-300 transition-colors rounded-full hover:border-sky-400"
                 >
                     <Avatar image={user?.user_metadata.avatar} />
                 </Link>

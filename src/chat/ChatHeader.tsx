@@ -15,7 +15,10 @@ function ChatHeader() {
                 <Link className="block p-1.5" to="/chat">
                     <ChevronLeftIcon className="size-5" />
                 </Link>
-                <Link to={`/account/${friend?.id}`}>
+                <Link
+                    className=" border-2 border-transparent duration-300 transition-colors rounded-full hover:border-sky-400"
+                    to={`/account/${friend?.id}`}
+                >
                     <Avatar image={friend?.avatar || ''} />
                 </Link>
                 <p className="font-medium text-lg">{friend?.username || ''}</p>

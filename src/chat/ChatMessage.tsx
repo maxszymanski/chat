@@ -16,13 +16,7 @@ function ChatMessage() {
     const { friendId } = useFriend(userId || ANONYMOUS_USER_ID)
     const { sendMessage } = useSendMessage()
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-    const {
-        register,
-        handleSubmit,
-        // formState: { errors },
-        reset,
-        watch,
-    } = useForm<MessageType>()
+    const { register, handleSubmit, reset, watch } = useForm<MessageType>()
 
     const inputValue = watch('content')?.trim()
 

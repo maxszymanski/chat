@@ -55,7 +55,9 @@ export function useMessages(listUser: string | null = null) {
                     queryClient.invalidateQueries({
                         queryKey: ['messages', userId, otherUserId],
                     })
-                    queryClient.refetchQueries({ queryKey: ['messages'] })
+                    queryClient.refetchQueries({
+                        queryKey: ['messages'],
+                    })
                 }
             }
         )

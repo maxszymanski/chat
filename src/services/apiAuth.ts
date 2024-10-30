@@ -1,3 +1,4 @@
+import { getMyLastMessages } from './apiChat'
 import supabase, { supabaseUrl } from './supabase'
 
 export async function signIn({
@@ -116,7 +117,13 @@ export async function getAllUsers() {
     } = await supabase.auth.getSession()
     const currentUserId = session?.user?.id
 
-    const { data, error } = await supabase
+    if (!currentUserId) {
+        return []
+    }
+
+    const lastConversations = await getMyLastMessages(currentUserId)
+
+    const { data: users, error } = await supabase
         .from('users')
         .select('*')
         .not('id', 'eq', currentUserId)
@@ -127,19 +134,45 @@ export async function getAllUsers() {
         return []
     }
 
-    return data
+    const conversationMap = lastConversations.map(
+        (conv: { user_id: string }) => conv.user_id
+    )
+    const indexMap = Object.fromEntries(
+        conversationMap.map((id: string, index: number) => [id, index])
+    )
+
+    return users.sort((a, b) => {
+        const aIndex = indexMap[a.id]
+        const bIndex = indexMap[b.id]
+
+        if (aIndex === undefined && bIndex === undefined) return 0
+
+        if (aIndex === undefined) return 1
+        if (bIndex === undefined) return -1
+
+        return aIndex - bIndex
+    })
 }
 export async function getFriendsUsers() {
     const {
         data: { session },
     } = await supabase.auth.getSession()
+
+    const currentUserId = session?.user?.id
+
+    if (!currentUserId) {
+        return []
+    }
+
+    const lastConversations = await getMyLastMessages(currentUserId)
+
     const currentUserFriends = session?.user?.user_metadata?.friends || []
 
     if (currentUserFriends.length === 0) {
         return []
     }
 
-    const { data, error } = await supabase
+    const { data: users, error } = await supabase
         .from('users')
         .select('*')
         .in('id', currentUserFriends)
@@ -150,7 +183,24 @@ export async function getFriendsUsers() {
         return []
     }
 
-    return data
+    const conversationMap = lastConversations.map(
+        (conv: { user_id: string }) => conv.user_id
+    )
+    const indexMap = Object.fromEntries(
+        conversationMap.map((id: string, index: number) => [id, index])
+    )
+
+    return users.sort((a, b) => {
+        const aIndex = indexMap[a.id]
+        const bIndex = indexMap[b.id]
+
+        if (aIndex === undefined && bIndex === undefined) return 0
+
+        if (aIndex === undefined) return 1
+        if (bIndex === undefined) return -1
+
+        return aIndex - bIndex
+    })
 }
 
 export async function getUserFriend(id: string) {
@@ -197,6 +247,14 @@ export async function updateStatus(status = '') {
     })
     if (error) throw new Error(error.message)
 }
+// export async function updateLastConversation(last_conversations) {
+//     const { error } = await supabase.auth.updateUser({
+//         data: {
+//             last_conversations,
+//         },
+//     })
+//     if (error) throw new Error(error.message)
+// }
 
 export async function addUserFriends(newFriend: string) {
     const userDate = await getCurrentUser()

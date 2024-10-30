@@ -10,6 +10,7 @@ export function useSendMessage() {
                 queryKey: ['messages'],
             })
             queryClient.refetchQueries({ queryKey: ['messages'] })
+            queryClient.refetchQueries({ queryKey: ['users'] })
         },
         onError: (err) => console.log(err),
     })

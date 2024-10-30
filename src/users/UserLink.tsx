@@ -54,7 +54,7 @@ function UserLink({ user }: { user: UserFriend }) {
             className={`relative w-full    flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
         >
             <button
-                className="shrink-0"
+                className="shrink-0 border-2 border-transparent duration-300 transition-colors rounded-full hover:border-sky-400 "
                 value={id}
                 onClick={(e) =>
                     openLinkModal((e.target as HTMLButtonElement).value)
@@ -67,7 +67,7 @@ function UserLink({ user }: { user: UserFriend }) {
                 className={`flex items-center gap-4 py-3  w-4/5 grow-0  px-2 justify-between `}
                 to={`/chat/${id}`}
             >
-                <div className="flex flex-col gap-1.5 max-w-full">
+                <div className="flex flex-col gap-1 max-w-full">
                     <p
                         className={`text-lg text-sky-950  leading-5  ${isMessageNotSeen ? 'font-bold' : ' font-medium'}`}
                     >
@@ -89,7 +89,7 @@ function UserLink({ user }: { user: UserFriend }) {
                             </p>
                         </div>
                     ) : (
-                        <p className="text-sm mt-1 text-gray-500 overflow-hidden break-words whitespace-nowrap overflow-ellipsis ">
+                        <p className="text-sm  text-gray-500 overflow-hidden break-words whitespace-nowrap overflow-ellipsis ">
                             {status}
                         </p>
                     )}

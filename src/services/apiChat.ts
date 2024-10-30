@@ -17,6 +17,18 @@ export async function getMyMessages(id: string, otherUserId: string) {
 
     return data
 }
+export async function getMyLastMessages(id: string) {
+    const { data, error } = await supabase
+        .rpc('get_latest_conversation_users', { user_id: id })
+        .order('created_at', { ascending: false })
+
+    if (error) {
+        console.error('Error fetching conversations:', error)
+        return []
+    }
+
+    return data
+}
 
 export async function createMessage(newMessage: MessageType) {
     const { data, error } = await supabase
