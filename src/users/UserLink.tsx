@@ -1,12 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
 import Avatar from './Avatar'
 import { UserFriend } from '../types/types'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import LinksModal from '../components/LinksModal'
 import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
 import { format, parseISO, isToday, isBefore, subDays } from 'date-fns'
 import { pl } from 'date-fns/locale'
+import newMessageSound from '../chat/plum.mp3'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
@@ -15,10 +16,21 @@ function UserLink({ user }: { user: UserFriend }) {
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
     const { messages, isLoading } = useMessages(id)
+    const audioRef = useRef(new Audio(newMessageSound))
 
     useEffect(() => {
         setIsActive(userId === id)
     }, [userId, id])
+
+    useEffect(() => {
+        if (
+            messages[messages.length - 1]?.sender_id === id &&
+            messages[messages.length - 1]?.read_status === false &&
+            messages.length > 0
+        ) {
+            audioRef.current.play()
+        }
+    }, [messages, messages.length, id])
 
     const openLinkModal = (value: string | null) => {
         setOpenModal(value === id)

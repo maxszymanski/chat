@@ -34,7 +34,7 @@ function MessagesList() {
                 updateMessageStatus(messageToUpdate)
             }
         }
-    }, [messages, updateMessageStatus, user])
+    }, [messages, updateMessageStatus, user, messages.length])
 
     return (
         <ul className="flex flex-col gap-4 justify-end min-h-full ">
