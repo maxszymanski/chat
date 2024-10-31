@@ -6,15 +6,16 @@ import {
 import FileButton from '../components/FileButton'
 import { useRef } from 'react'
 
-function FileArea() {
+interface FileAreaProps {
+    setFile: React.Dispatch<React.SetStateAction<File | null>>
+}
+
+const FileArea: React.FC<FileAreaProps> = ({ setFile }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]
-        if (file) {
-            // updateAvatar(file)
-            console.log(file)
-        }
+        const selectedFile = event.target.files?.[0]
+        if (selectedFile) setFile(selectedFile)
     }
 
     const handleImageClick = () => {

@@ -3,20 +3,23 @@ import { useUser } from '../hooks/useUser'
 import { useFriend } from '../hooks/useFriend'
 import { useSendMessage } from '../hooks/useSendMessage'
 import { MessageType } from '../types/types'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import FileArea from './FileArea'
 import { HandThumbUpIcon } from '@heroicons/react/16/solid'
 import { useParams } from 'react-router-dom'
+import { useSendFile } from '../hooks/useSendFile'
 
 const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
 
 function ChatMessage() {
+    const [file, setFile] = useState<File | null>(null)
     const { userId } = useParams()
     const { user } = useUser()
     const { friendId } = useFriend(userId || ANONYMOUS_USER_ID)
     const { sendMessage } = useSendMessage()
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const { register, handleSubmit, reset, watch } = useForm<MessageType>()
+    const { sendFile } = useSendFile()
 
     const inputValue = watch('content')?.trim()
 
@@ -70,13 +73,25 @@ function ChatMessage() {
         }
     }
 
+    const handleSendFile = () => {
+        if (file) {
+            const newMessage: MessageType = {
+                sender_id: user?.id || '1',
+                receiver_id: friendId || '2',
+                content: '',
+            }
+            const fileAndMessage = { file, newMessage }
+            sendFile(fileAndMessage)
+        }
+    }
+
     return (
         <div className="px-2">
             <form
                 className="py-3 w-full flex items-center gap-2 justify-between"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <FileArea />
+                <FileArea setFile={setFile} />
                 <textarea
                     className="px-3  rounded-2xl bg-sky-200 font-normal border border-transparent hover:border-slate-200 focus:outline-none focus:border-slate-200  py-1 w-full text-base resize-none overflow-hidden h-8"
                     id="message"
@@ -101,9 +116,9 @@ function ChatMessage() {
                 <button
                     type={inputValue ? 'submit' : 'button'}
                     className="p-2 text-sky-500"
-                    onClick={sendLike}
+                    onClick={file ? handleSendFile : sendLike}
                 >
-                    {inputValue ? (
+                    {inputValue || file ? (
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"

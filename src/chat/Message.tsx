@@ -67,7 +67,12 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                 : null
 
     const isSvg = message.content.startsWith('<svg')
-    const isLink = message.content.startsWith('http')
+    const isLink =
+        message.content.startsWith('http') &&
+        !message.content.includes('supabase.co/storage')
+    const isFile =
+        message.content.startsWith('http') &&
+        message.content.includes('supabase.co/storage')
 
     return (
         <li key={message.id}>
@@ -109,6 +114,11 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                         >
                             {message.content}
                         </Link>
+                    ) : isFile ? (
+                        <img
+                            className="h-10 w-10 rounded-sm"
+                            src={message.content}
+                        />
                     ) : (
                         <p className={commonClass}>{message.content}</p>
                     )}
