@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import LinksModal from '../components/LinksModal'
 import { useMessages } from '../hooks/useMessages'
 import Loader from '../components/Loader'
-import { format, parseISO, isToday } from 'date-fns'
+import { format, parseISO, isToday, isBefore, subDays } from 'date-fns'
 import { pl } from 'date-fns/locale'
 
 function UserLink({ user }: { user: UserFriend }) {
@@ -44,10 +44,23 @@ function UserLink({ user }: { user: UserFriend }) {
     const date = messageCreated && parseISO(messageCreated)
 
     const today = date && isToday(date)
+    const olderThanWeek = date && isBefore(date, subDays(new Date(), 7))
 
     const formattedDay =
         date && format(date, 'EEEE', { locale: pl }).slice(0, 3)
     const formattedTime = date && format(date, 'HH:mm')
+    const dayOfMonth = date && format(date, 'd')
+    const month = date && format(date, 'MMMM', { locale: pl }).slice(0, 3)
+    const formattedDate = `${dayOfMonth} ${month}.`
+
+    const showMessageTime =
+        today && !olderThanWeek
+            ? formattedTime
+            : !today && !olderThanWeek
+              ? `${formattedDay}. ${formattedTime}`
+              : !today && olderThanWeek
+                ? formattedDate
+                : null
 
     return (
         <li
@@ -85,7 +98,7 @@ function UserLink({ user }: { user: UserFriend }) {
                                 {isSvg ? '👍' : `${lastMessage}`}
                             </p>
                             <p className="text-xs text-nowrap  ">
-                                {today ? formattedTime : `${formattedDay}`}
+                                {showMessageTime}
                             </p>
                         </div>
                     ) : (

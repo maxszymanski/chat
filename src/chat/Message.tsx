@@ -5,7 +5,14 @@ import parse from 'html-react-parser'
 
 import { Message as MessageType } from '../types/types'
 import { useFriend } from '../hooks/useFriend'
-import { differenceInMinutes, format, isToday, parseISO } from 'date-fns'
+import {
+    differenceInMinutes,
+    format,
+    isBefore,
+    isToday,
+    parseISO,
+    subDays,
+} from 'date-fns'
 import { pl } from 'date-fns/locale'
 import { useState } from 'react'
 
@@ -38,10 +45,26 @@ function Message({ message, index }: { message: MessageType; index: number }) {
         (!previousDate || differenceInMinutes(currentDate, previousDate) >= 10)
 
     const today = currentDate && isToday(currentDate)
+    const olderThanWeek =
+        currentDate && isBefore(currentDate, subDays(new Date(), 7))
 
     const formattedDay =
         currentDate && format(currentDate, 'EEEE', { locale: pl }).slice(0, 3)
     const formattedTime = currentDate && format(currentDate, 'HH:mm')
+
+    const dayOfMonth = currentDate && format(currentDate, 'd')
+    const month =
+        currentDate && format(currentDate, 'MMMM', { locale: pl }).slice(0, 3)
+    const formattedDateWithTime = `${dayOfMonth} ${month}. ${formattedTime}`
+
+    const showMessageTime =
+        today && !olderThanWeek
+            ? formattedTime
+            : !today && !olderThanWeek
+              ? `${formattedDay}. ${formattedTime}`
+              : !today && olderThanWeek
+                ? formattedDateWithTime
+                : null
 
     const isSvg = message.content.startsWith('<svg')
     const isLink = message.content.startsWith('http')
@@ -52,9 +75,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                 className={`text-xs text-center items-center gap-4 py-10  ${showTimeDivider ? 'flex' : 'hidden'} `}
             >
                 <div className="h-[1px] w-full bg-stone-200"></div>
-                <p className="text-nowrap">
-                    {today ? formattedTime : `${formattedDay} ${formattedTime}`}
-                </p>
+                <p className="text-nowrap">{showMessageTime}</p>
                 <div className="h-[1px] w-full bg-stone-200"></div>
             </div>
 
@@ -100,7 +121,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                         : 'text-end mx-4'
                 } `}
             >
-                {today ? formattedTime : `${formattedDay} ${formattedTime}`}
+                {showMessageTime}
             </p>
         </li>
     )
