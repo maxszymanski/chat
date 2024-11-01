@@ -20,7 +20,7 @@ function Account() {
     }
     return (
         <div
-            className={`bg-gray-100 font-nunito  h-screen flex flex-col ${modalState.isOpen ? 'overflow-hidden h-screen' : 'overflow-auto'} `}
+            className={`bg-gray-100 font-nunito  h-dvh flex flex-col ${modalState.isOpen ? 'overflow-hidden h-dvh' : 'overflow-auto'} `}
         >
             <Outlet />
         </div>

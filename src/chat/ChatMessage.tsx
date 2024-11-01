@@ -45,6 +45,7 @@ function ChatMessage() {
         sendMessage(newMessage, {
             onSuccess: () => {
                 reset()
+
                 if (textareaRef.current)
                     textareaRef.current.style.height = `32px`
             },
@@ -93,9 +94,11 @@ function ChatMessage() {
             >
                 <FileArea setFile={setFile} />
                 <textarea
-                    className="px-3  rounded-2xl bg-sky-200 font-normal border border-transparent hover:border-slate-200 focus:outline-none focus:border-slate-200  py-1 w-full text-base resize-none overflow-hidden h-8"
+                    className="px-3  rounded-2xl bg-sky-200 font-normal border border-transparent hover:border-slate-200 focus:outline-none focus:border-slate-200  py-1 w-full text-base resize-none overflow-hidden h-8  placeholder:invisible focus:placeholder:visible placeholder:text-slate-400"
                     id="message"
                     autoComplete="off"
+                    placeholder="Napisz wiadomość..."
+                    disabled={file ? true : false}
                     {...register('content', {
                         required: true,
                         onChange: handleInput,
@@ -111,7 +114,7 @@ function ChatMessage() {
                             handleSubmit(onSubmit)()
                         }
                     }}
-                />
+                ></textarea>
 
                 <button
                     type={inputValue ? 'submit' : 'button'}

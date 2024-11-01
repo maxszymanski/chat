@@ -15,7 +15,7 @@ function UserLink({ user }: { user: UserFriend }) {
     const { username, avatar, id, status } = user
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
-    const { messages, isLoading } = useMessages(id)
+    const { messages, isLoadingMessages } = useMessages(id)
     const audioRef = useRef(new Audio(newMessageSound))
 
     useEffect(() => {
@@ -39,7 +39,7 @@ function UserLink({ user }: { user: UserFriend }) {
         setOpenModal(false)
     }
 
-    if (isLoading) return <Loader />
+    if (isLoadingMessages) return <Loader />
 
     const lastMessage = messages[messages.length - 1]?.content
     const fromFriendMessage = messages[messages.length - 1]?.sender_id === id
@@ -52,6 +52,9 @@ function UserLink({ user }: { user: UserFriend }) {
     const messageCreated = messages[messages.length - 1]?.created_at
 
     const isSvg = lastMessage?.startsWith('<svg')
+    const isFile =
+        lastMessage?.startsWith('http') &&
+        lastMessage?.includes('supabase.co/storage')
 
     const date = messageCreated && parseISO(messageCreated)
 
@@ -107,7 +110,11 @@ function UserLink({ user }: { user: UserFriend }) {
                                 {!fromFriendMessage && (
                                     <span className="mr-1  ">Ty:</span>
                                 )}
-                                {isSvg ? '👍' : `${lastMessage}`}
+                                {isSvg
+                                    ? '👍'
+                                    : isFile
+                                      ? `${!fromFriendMessage ? 'Wysłałeś(aś) zdjęcie' : `${username} wysłał(a) zdjęcie`}`
+                                      : `${lastMessage}`}
                             </p>
                             <p className="text-xs text-nowrap  ">
                                 {showMessageTime}

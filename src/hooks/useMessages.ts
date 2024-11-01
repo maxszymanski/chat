@@ -15,7 +15,7 @@ export function useMessages(listUser: string | null = null) {
     const otherUserId = listUser || otherUser || ANONYMOUS_USER_ID
 
     const {
-        isLoading,
+        isLoading: isLoadingMessages,
         error,
         data: messages = [],
     } = useQuery<Message[]>({
@@ -77,5 +77,5 @@ export function useMessages(listUser: string | null = null) {
         }
     }, [userId, otherUserId, queryClient])
 
-    return { isLoading, error, messages }
+    return { isLoadingMessages, error, messages }
 }

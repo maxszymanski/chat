@@ -28,13 +28,26 @@ function Message({ message, index }: { message: MessageType; index: number }) {
         index === messages.length - 1 ||
         messages[index + 1].sender_id !== message.sender_id
 
-    const commonClass = ` p-3 max-w-60  rounded-2xl  text-start  w-fit ${
+    const isLastFromMy =
+        index === messages.length - 1 && message.sender_id === user?.id
+
+    const previousSenderId = index > 0 ? messages[index - 1]?.sender_id : null
+    const isSameSenderAsPrevious = previousSenderId === message.sender_id
+
+    const commonClass = ` p-3 max-w-64  rounded-2xl  text-start  w-fit ${
         message.receiver_id === user?.id ? 'bg-white ' : 'bg-sky-300 '
     }`
 
     const messageCreated = message?.created_at
     const previousMessageCreated =
         index > 0 ? messages[index - 1]?.created_at : null
+
+    const fromFriendMessage =
+        messages[messages.length - 1]?.sender_id === friend?.id
+
+    const isFriendSeeMessage =
+        messages[messages.length - 1]?.read_status === true &&
+        !fromFriendMessage
 
     const currentDate = messageCreated && parseISO(messageCreated)
     const previousDate =
@@ -75,7 +88,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
         message.content.includes('supabase.co/storage')
 
     return (
-        <li key={message.id}>
+        <li className={isSameSenderAsPrevious ? 'mt-0' : 'mt-4'}>
             <div
                 className={`text-xs text-center items-center gap-4 py-10  ${showTimeDivider ? 'flex' : 'hidden'} `}
             >
@@ -115,24 +128,44 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                             {message.content}
                         </Link>
                     ) : isFile ? (
-                        <img
-                            className="h-10 w-10 rounded-sm"
-                            src={message.content}
-                        />
+                        <div
+                            className={`max-w-60 rounded-lg  overflow-hidden bg-transparent ${
+                                message.receiver_id === user?.id
+                                    ? 'self-start flex-row '
+                                    : 'self-end  flex-row-reverse'
+                            }`}
+                        >
+                            <img
+                                className="h-full w-full object-contain  rounded-lg"
+                                src={message.content}
+                            />
+                        </div>
                     ) : (
                         <p className={commonClass}>{message.content}</p>
                     )}
                 </div>
             </div>
-            <p
-                className={`text-nowrap text-xs mt-2  ${isOpenDate ? 'block' : 'hidden'}  ${
+            <div
+                className={`flex items-start mt-2 ${
                     message.receiver_id === user?.id
-                        ? 'mx-12 '
-                        : 'text-end mx-4'
-                } `}
+                        ? ' self-start flex-row'
+                        : ' self-end flex-row-reverse'
+                }`}
             >
-                {showMessageTime}
-            </p>
+                {isLastFromMy && isFriendSeeMessage && (
+                    <img
+                        src={friendAvatar}
+                        className={`w-3 h-3  rounded-full object-top object-cover  text-end`}
+                    />
+                )}
+                <p
+                    className={`text-nowrap text-xs   ${isOpenDate ? 'block' : 'hidden'}  ${
+                        message.receiver_id === user?.id ? 'mx-10  ' : ' mx-3'
+                    } `}
+                >
+                    {showMessageTime}
+                </p>
+            </div>
         </li>
     )
 }
