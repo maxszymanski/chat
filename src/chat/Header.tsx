@@ -16,7 +16,7 @@ function Header() {
                 to="/chat"
                 className="font-atma font-medium block text-sky-500 text-2xl sm:text-3xl  "
             >
-                Live Chat
+                Paplanek
             </Link>
             <div className="flex items-center gap-4">
                 <p className="hidden md:block text-sky-500 text-lg font-medium">

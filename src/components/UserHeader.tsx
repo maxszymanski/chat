@@ -19,7 +19,7 @@ function UserHeader() {
                 <ChevronLeftIcon className="size-5 " />
             </button>
             <p className="text-sky-500 font-atma text-2xl sm:text-3xl ">
-                Live Chat
+                Paplanek
             </p>
         </div>
     )

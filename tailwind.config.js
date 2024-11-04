@@ -13,6 +13,10 @@ export default {
                     '100%': { opacity: '100' },
                 },
             },
+            backgroundImage: {
+                home: "URL('/public/home2.jpg')",
+                homeLarge: "URL('/public/home2_large.jpg')",
+            },
             animation: {
                 visible: 'visible 0.3s  ',
             },
