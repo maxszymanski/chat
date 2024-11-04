@@ -42,6 +42,7 @@ function MessagesList() {
                     <Message key={message.id} message={message} index={index} />
                 )
             })}
+
             <li ref={messagesEndRef} />
         </ul>
     )

@@ -145,6 +145,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                     )}
                 </div>
             </div>
+
             <div
                 className={`flex items-start mt-2 ${
                     message.receiver_id === user?.id

@@ -8,18 +8,21 @@ import FileArea from './FileArea'
 import { HandThumbUpIcon } from '@heroicons/react/16/solid'
 import { useParams } from 'react-router-dom'
 import { useSendFile } from '../hooks/useSendFile'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import Spinner from '../components/Spinner'
 
 const ANONYMOUS_USER_ID = '00000000-0000-0000-0000-000000000000'
 
 function ChatMessage() {
     const [file, setFile] = useState<File | null>(null)
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
     const { userId } = useParams()
     const { user } = useUser()
     const { friendId } = useFriend(userId || ANONYMOUS_USER_ID)
     const { sendMessage } = useSendMessage()
     const textareaRef = useRef<HTMLTextAreaElement | null>(null)
     const { register, handleSubmit, reset, watch } = useForm<MessageType>()
-    const { sendFile } = useSendFile()
+    const { sendFile, isSendingFile } = useSendFile()
 
     const inputValue = watch('content')?.trim()
 
@@ -74,6 +77,18 @@ function ChatMessage() {
         }
     }
 
+    const clearPreview = () => {
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl)
+            setPreviewUrl(null)
+        }
+    }
+
+    const handleClearFile = () => {
+        setFile(null)
+        clearPreview()
+    }
+
     const handleSendFile = () => {
         if (file) {
             const newMessage: MessageType = {
@@ -82,7 +97,7 @@ function ChatMessage() {
                 content: '',
             }
             const fileAndMessage = { file, newMessage }
-            sendFile(fileAndMessage)
+            sendFile(fileAndMessage, { onSuccess: () => handleClearFile() })
         }
     }
 
@@ -92,29 +107,49 @@ function ChatMessage() {
                 className="py-3 w-full flex items-center gap-2 justify-between"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <FileArea setFile={setFile} />
-                <textarea
-                    className="px-3  rounded-2xl bg-sky-200 font-normal border border-transparent hover:border-slate-200 focus:outline-none focus:border-slate-200  py-1 w-full text-base resize-none overflow-hidden h-8  placeholder:invisible focus:placeholder:visible placeholder:text-slate-400"
-                    id="message"
-                    autoComplete="off"
-                    placeholder="Napisz wiadomość..."
-                    disabled={file ? true : false}
-                    {...register('content', {
-                        required: true,
-                        onChange: handleInput,
-                    })}
-                    onInput={handleInput}
-                    ref={(e) => {
-                        register('content').ref(e)
-                        textareaRef.current = e
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault()
-                            handleSubmit(onSubmit)()
-                        }
-                    }}
-                ></textarea>
+                <FileArea setFile={setFile} setPreviewUrl={setPreviewUrl} />
+                {previewUrl ? (
+                    <div className="bg-sky-200 w-full px-5 items-center  rounded-2xl flex gap-2  py-0.5">
+                        <img
+                            className="h-12 w-12 rounded-lg "
+                            src={previewUrl}
+                            alt="podgląd"
+                        />
+                        {!isSendingFile ? (
+                            <button
+                                className=" text-stone-950  p-2"
+                                onClick={handleClearFile}
+                            >
+                                <XMarkIcon className="size-4" />
+                            </button>
+                        ) : (
+                            <Spinner />
+                        )}
+                    </div>
+                ) : (
+                    <textarea
+                        className="px-3  rounded-2xl bg-sky-200 font-normal border border-transparent hover:border-slate-200 focus:outline-none focus:border-slate-200  py-1 w-full text-base resize-none overflow-hidden h-8  placeholder:invisible focus:placeholder:visible placeholder:text-slate-400"
+                        id="message"
+                        autoComplete="off"
+                        placeholder="Napisz wiadomość..."
+                        disabled={file ? true : false}
+                        {...register('content', {
+                            required: true,
+                            onChange: handleInput,
+                        })}
+                        onInput={handleInput}
+                        ref={(e) => {
+                            register('content').ref(e)
+                            textareaRef.current = e
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                                e.preventDefault()
+                                handleSubmit(onSubmit)()
+                            }
+                        }}
+                    />
+                )}
 
                 <button
                     type={inputValue ? 'submit' : 'button'}

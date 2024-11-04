@@ -8,14 +8,19 @@ import { useRef } from 'react'
 
 interface FileAreaProps {
     setFile: React.Dispatch<React.SetStateAction<File | null>>
+    setPreviewUrl: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const FileArea: React.FC<FileAreaProps> = ({ setFile }) => {
+const FileArea: React.FC<FileAreaProps> = ({ setFile, setPreviewUrl }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0]
-        if (selectedFile) setFile(selectedFile)
+        if (selectedFile) {
+            setFile(selectedFile)
+            const imageUrl = URL.createObjectURL(selectedFile)
+            setPreviewUrl(imageUrl)
+        }
     }
 
     const handleImageClick = () => {
