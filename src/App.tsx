@@ -3,7 +3,6 @@ import AppLayout from './components/AppLayout'
 import Chat from './chat/Chat'
 import Login from './pages/Login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import Homepage from './pages/Homepage'
 import ProtectedRoute from './components/ProtectedRouth'
 import SignUp from './pages/SignUp'
@@ -104,7 +103,6 @@ function App() {
                         },
                     }}
                 />
-                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
             </QueryClientProvider>
         </ChatProvider>
     )

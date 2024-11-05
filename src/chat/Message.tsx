@@ -147,7 +147,7 @@ function Message({ message, index }: { message: MessageType; index: number }) {
             </div>
 
             <div
-                className={`flex items-start mt-2 ${
+                className={`flex items-start my-1 ${
                     message.receiver_id === user?.id
                         ? ' self-start flex-row'
                         : ' self-end flex-row-reverse'

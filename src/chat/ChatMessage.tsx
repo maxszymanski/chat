@@ -5,7 +5,7 @@ import { useSendMessage } from '../hooks/useSendMessage'
 import { MessageType } from '../types/types'
 import { useRef, useState } from 'react'
 import FileArea from './FileArea'
-import { HandThumbUpIcon } from '@heroicons/react/16/solid'
+import { HandThumbUpIcon, PaperAirplaneIcon } from '@heroicons/react/16/solid'
 import { useParams } from 'react-router-dom'
 import { useSendFile } from '../hooks/useSendFile'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -117,13 +117,18 @@ function ChatMessage() {
                         />
                         {!isSendingFile ? (
                             <button
-                                className=" text-stone-950  p-2"
+                                className=" text-stone-950  p-2 duration-300 transition-colors xl:hover:text-stone-600"
                                 onClick={handleClearFile}
                             >
                                 <XMarkIcon className="size-4" />
                             </button>
                         ) : (
-                            <Spinner />
+                            <>
+                                <Spinner />{' '}
+                                <span className="hidden text-sm xl:text-base md:block">
+                                    Wysyłanie zdjęcia
+                                </span>
+                            </>
                         )}
                     </div>
                 ) : (
@@ -153,20 +158,17 @@ function ChatMessage() {
 
                 <button
                     type={inputValue ? 'submit' : 'button'}
-                    className="p-2 text-sky-500"
+                    className="p-2 text-sky-500 duration-300 transition-colors xl:hover:text-sky-400"
                     onClick={file ? handleSendFile : sendLike}
                 >
-                    {inputValue || file ? (
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="size-6  h-6"
-                        >
-                            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
-                        </svg>
+                    {!isSendingFile ? (
+                        (inputValue || file) && !isSendingFile ? (
+                            <PaperAirplaneIcon className="size-6" />
+                        ) : (
+                            <HandThumbUpIcon className="w-6 h-6" />
+                        )
                     ) : (
-                        <HandThumbUpIcon className="w-6 h-6" />
+                        <Spinner />
                     )}
                 </button>
             </form>

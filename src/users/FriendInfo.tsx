@@ -33,7 +33,7 @@ function FriendInfo({ inProfile }: { inProfile: boolean }) {
                         <img
                             src={image || '/default-user.webp'}
                             alt={`Zdjęcie profilowe użytkownika ${name}`}
-                            className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48 "
+                            className=" object-cover object-top rounded-full  w-36 h-36 xl:w-48 xl:h-48 border border-sky-200 hover:border-sky-400 duration-300 transition-colors"
                         />
                     </Link>
 

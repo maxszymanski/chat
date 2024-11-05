@@ -36,7 +36,7 @@ function MessagesList() {
     }, [messages, updateMessageStatus, user, messages.length])
 
     return (
-        <ul className="flex flex-col gap-1 justify-end min-h-full ">
+        <ul className="flex flex-col  justify-end min-h-full ">
             {messages.map((message, index) => {
                 return (
                     <Message key={message.id} message={message} index={index} />
