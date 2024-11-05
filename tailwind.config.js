@@ -14,11 +14,15 @@ export default {
                 },
             },
             backgroundImage: {
-                home: "URL('/public/home2.jpg')",
-                homeLarge: "URL('/public/home2_large.jpg')",
+                home: "URL('/home2.webp')",
+                homeLarge: "URL('/home2_large.jpg')",
             },
             animation: {
                 visible: 'visible 0.3s  ',
+            },
+            colors: {
+                primary: '#4c7cc5',
+                secondary: '#7891B7',
             },
         },
     },

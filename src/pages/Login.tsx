@@ -35,20 +35,20 @@ function Login() {
             },
         })
     }
-    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-slate-50  outline-none focus:border-sky-500 border  transition-colors duration-300 hover:border-sky-500 text-sky-900 placeholder:text-slate-600`
+    const commonClass = `py-2 px-6 rounded-2xl  w-full  bg-primary/20  outline-none focus:border-stone-300 border  transition-colors duration-300 hover:border-stone-300 text-stone-100 xl:py-2.5  xl:placeholder:text-lg xl:text-lg`
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center py-8 bg-gradient-to-bl from-slate-100 to-sky-100">
-            <h2 className="text-sky-400 text-5xl text-center uppercase">
+        <>
+            <h2 className="text-6xl md:text-7xl text-center font-atma mb-8 sm:mb-6 md:mb-12 lg:mb-12 xl:mb-16 xl:text-8xl ">
                 Zaloguj się
             </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="px-8 py-12 flex flex-col gap-4 bg-sky-100 rounded-2xl mt-12 border border-sky-200"
+                className="px-6 py-10 flex flex-col gap-4 bg-white/10 backdrop-blur-sm rounded-2xl md:px-12  xl:gap-5"
             >
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.email ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
+                        className={`${commonClass}  ${errors.email ? 'border-red-500 focus:border-red-500 placeholder:text-red-500 ' : 'border-primary placeholder:text-stone-300'}`}
                         placeholder="Email"
                         id="email"
                         type="email"
@@ -69,7 +69,7 @@ function Login() {
                 </div>
                 <div>
                     <input
-                        className={`${commonClass}  ${errors.password ? 'border-red-500 focus:border-red-500 bg-red-100' : 'border-sky-200'}`}
+                        className={`${commonClass}  ${errors.password ? 'border-red-500 focus:border-red-500  placeholder:text-red-500' : 'border-primary placeholder:text-stone-300'}`}
                         placeholder="Hasło"
                         id="password"
                         type="password"
@@ -89,22 +89,26 @@ function Login() {
                         </p>
                     )}
                 </div>
-                <div className=" flex flex-col gap-4 mt-4">
+                <div className=" flex flex-col gap-4 mt-4 font-atma tracking-wider xl:gap-5 xl:mt-5">
                     <button
-                        className="w-full p-2 bg-sky-400 rounded-2xl font-medium text-sky-50 transition-colors duration-300 hover:bg-sky-500 flex items-center justify-center gap-2 "
+                        className="w-full p-2 bg-primary rounded-2xl font-medium text-stone-100 transition-colors duration-300 hover:bg-[#3868af] flex items-center justify-center gap-2 md:text-xl text-lg"
                         disabled={isPending}
                     >
                         {isPending && <Spinner />} Zaloguj
                     </button>
                     <Link
                         to="/signup"
-                        className=" block p-2 bg-sky-200 rounded-2xl text-center font-medium transition-colors duration-300 hover:bg-sky-300"
+                        className=" block p-2 md:text-xl text-lg bg-secondary rounded-2xl 
+                        text-[#041927]  text-center font-medium transition-colors duration-300 hover:bg-[#6c82a4]"
                     >
                         Wpisz się
                     </Link>
+                    <button className="w-full p-2 bg-white/20 backdrop-blur-sm rounded-2xl font-medium text-stone-200 transition-colors duration-300 hover:bg-white/30 flex items-center justify-center gap-2 md:text-xl text-lg">
+                        Wpisz sie jako gość
+                    </button>
                 </div>
             </form>
-        </div>
+        </>
     )
 }
 

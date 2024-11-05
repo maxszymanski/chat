@@ -14,19 +14,23 @@ import UserProfile from './users/UserProfile'
 import { Toaster } from 'react-hot-toast'
 import PublicProfile from './users/PublicProfile'
 import FullPageImage from './users/FullPageImage'
+import Welcome from './pages/Welcome'
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Homepage />,
-    },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/signup',
-        element: <SignUp />,
+        children: [
+            {
+                path: '',
+                element: <Welcome />,
+            },
+            { path: '/login', element: <Login /> },
+            {
+                path: '/signup',
+                element: <SignUp />,
+            },
+        ],
     },
 
     {
