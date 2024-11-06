@@ -1,8 +1,10 @@
+import { FieldError } from 'react-hook-form'
+
 export interface User {
     email: string
     password: string
-    passwordConfirm: string
-    username: string
+    passwordConfirm: string | null
+    username: string | null
 }
 export interface MessageType {
     sender_id: string
@@ -42,4 +44,14 @@ export interface Message {
 export interface Pass {
     password: string
     passwordConfirm: string
+}
+
+export interface FormInputTypes {
+    error: FieldError | null
+    placeholder: string
+    type: string
+    id: string
+    formRegister: object
+    errorMessage: string | null
+    isPending: boolean
 }

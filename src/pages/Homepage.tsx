@@ -1,7 +1,6 @@
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useUser } from '../hooks/useUser'
 import { useEffect } from 'react'
-import Loader from '../components/Loader'
 
 function Homepage() {
     const { isAuthenticated, isLoading } = useUser()
@@ -14,8 +13,6 @@ function Homepage() {
         },
         [isAuthenticated, isLoading, navigate]
     )
-
-    if (isLoading) return <Loader />
 
     return (
         <div className="min-h-dvh flex flex-col items-end justify-center bg-home  lg:bg-homeLarge bg-cover lg:bg-right relative bg-center pl-20 pr-2.5 py-6 sm:pr-6 md:pl-0 md:pr-28">

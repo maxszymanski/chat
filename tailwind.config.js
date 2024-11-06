@@ -13,12 +13,12 @@ export default {
                     '100%': { opacity: '100' },
                 },
             },
+            animation: {
+                visible: 'visible 0.3s  ',
+            },
             backgroundImage: {
                 home: "URL('/home2.webp')",
                 homeLarge: "URL('/home2_large.jpg')",
-            },
-            animation: {
-                visible: 'visible 0.3s  ',
             },
             colors: {
                 primary: '#4c7cc5',
