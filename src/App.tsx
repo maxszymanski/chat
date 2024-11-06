@@ -1,19 +1,20 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AppLayout from './components/AppLayout'
+import AppLayout from './pages/AppLayout'
 import Chat from './chat/Chat'
-import Login from './pages/Login'
+import Login from './users/Login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Homepage from './pages/Homepage'
 import ProtectedRoute from './components/ProtectedRouth'
-import SignUp from './pages/SignUp'
+import SignUp from './users/SignUp'
 import ChatNavigation from './chat/ChatNavigation'
 import { ChatProvider } from './context/ChatContext'
-import Account from './users/Account'
+import Account from './pages/Account'
 import UserProfile from './users/UserProfile'
 import { Toaster } from 'react-hot-toast'
 import PublicProfile from './users/PublicProfile'
 import FullPageImage from './users/FullPageImage'
-import Welcome from './pages/Welcome'
+import Welcome from './components/Welcome'
+import PageNotFound from './pages/PageNotFound'
 
 const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             { path: '/account/:userId', element: <PublicProfile /> },
             { path: '/account/picture/:userId', element: <FullPageImage /> },
         ],
+    },
+    {
+        path: '*',
+        element: <PageNotFound />,
     },
 ])
 

@@ -10,7 +10,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
     useEffect(
         function () {
-            if (!isAuthenticated && !isLoading) navigate('/login')
+            if (!isAuthenticated && !isLoading) navigate('/')
         },
         [isAuthenticated, isLoading, navigate]
     )

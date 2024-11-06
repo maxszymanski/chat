@@ -66,7 +66,6 @@ function Login() {
                 />
                 <FormButtonsBox>
                     <HomeFormButton isPending={isPending} text="Zaloguj" />
-
                     <FormLink to="/signup" text="Wpisz się" />
                     <SingUpAsGuestButton />
                 </FormButtonsBox>
