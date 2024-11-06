@@ -3,8 +3,8 @@ import { FieldError } from 'react-hook-form'
 export interface User {
     email: string
     password: string
-    passwordConfirm: string | null
-    username: string | null
+    passwordConfirm: string
+    username: string
 }
 export interface MessageType {
     sender_id: string
