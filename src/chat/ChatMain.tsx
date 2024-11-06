@@ -14,7 +14,7 @@ function ChatMain() {
             className="flex-1 overflow-y-auto px-6 py-6 text-lg relative scrollbar-thin
         scrollbar-thumb-sky-300 scrollbar-track-sky-100"
         >
-            {isLoadingMessages || (isLoading && <Loader />)}
+            {(isLoadingMessages || isLoading) && <Loader />}
             {messages.length > 0 && friend && <MessagesList />}
             {messages.length === 0 && friend && <EmptyChat />}
         </main>

@@ -1,0 +1,25 @@
+{
+    "lang": "PL",
+    "dir": "ltr",
+    "name": "Paplanek",
+    "description": "Najlepszy czat w 2024 roku!",
+    "short_name": "Paplanek",
+    "icons": [
+        {
+            "src": "icons/chat64.png",
+            "sizes": "64×64",
+            "type": "image/png"
+        },
+
+        {
+            "src": "icons/chat128.png",
+            "sizes": "128×128"
+        }
+    ],
+
+    "start_url": "/",
+    "display": "fullscreen",
+    "orientation": "landscape",
+    "theme_color": "#f3f4f6",
+    "background_color": "#f3f4f6"
+}
