@@ -44,7 +44,6 @@ export default defineConfig({
                 ],
                 start_url: '/',
                 display: 'fullscreen',
-                orientation: 'landscape',
             },
         }),
     ],
