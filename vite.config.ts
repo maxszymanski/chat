@@ -12,7 +12,7 @@ export default defineConfig({
                 enabled: true,
             },
             manifest: {
-                id: '',
+                id: 'https://paplanek.netlify.app/',
                 lang: 'PL',
                 dir: 'ltr',
                 name: 'Paplanek',
