@@ -1,14 +1,20 @@
 import { MessageType } from '../types/types'
 import supabase, { supabaseUrl } from './supabase'
 
-export async function getMyMessages(id: string, otherUserId: string) {
+export async function getMyMessages(
+    id: string,
+    otherUserId: string,
+    limit: number = 20,
+    offset: number = 0
+) {
     const { data, error } = await supabase
         .from('messages')
         .select('*')
         .or(
             `and(sender_id.eq.${id},receiver_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},receiver_id.eq.${id})`
         )
-        .order('created_at', { ascending: true })
+        .order('created_at', { ascending: false })
+        .range(offset, offset + limit - 1)
 
     if (error) {
         console.error('Error fetching messages:', error)

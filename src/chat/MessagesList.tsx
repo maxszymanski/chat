@@ -21,6 +21,11 @@ function MessagesList() {
     useEffect(() => {
         if (messages.length > 0) {
             scrollToBottom()
+        }
+    }, [messages.length])
+
+    useEffect(() => {
+        if (messages.length > 0) {
             const lastMessageId = messages[messages.length - 1]?.id
             const fromFriendMessage =
                 messages[messages.length - 1]?.sender_id != user?.id

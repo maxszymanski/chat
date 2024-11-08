@@ -82,7 +82,7 @@ function UserLink({ user }: { user: UserFriend }) {
             className={`relative w-full    flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
         >
             <button
-                className="shrink-0 border-2  duration-300 transition-colors rounded-full hover:border-sky-400 border border-sky-200"
+                className="shrink-0   duration-300 transition-colors rounded-full hover:border-sky-400 border border-sky-200"
                 value={id}
                 onClick={(e) =>
                     openLinkModal((e.target as HTMLButtonElement).value)

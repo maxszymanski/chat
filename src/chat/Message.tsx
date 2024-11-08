@@ -14,9 +14,15 @@ import {
     subDays,
 } from 'date-fns'
 import { pl } from 'date-fns/locale'
-import { useState } from 'react'
+import { memo, useMemo, useState } from 'react'
 
-function Message({ message, index }: { message: MessageType; index: number }) {
+const Message = memo(function Message({
+    message,
+    index,
+}: {
+    message: MessageType
+    index: number
+}) {
     const [isOpenDate, setIsOpenDate] = useState(false)
     const { messages } = useMessages()
     const { user } = useUser()
@@ -79,13 +85,22 @@ function Message({ message, index }: { message: MessageType; index: number }) {
                 ? formattedDateWithTime
                 : null
 
-    const isSvg = message.content.startsWith('<svg')
-    const isLink =
-        message.content.startsWith('http') &&
-        !message.content.includes('supabase.co/storage')
-    const isFile =
-        message.content.startsWith('http') &&
-        message.content.includes('supabase.co/storage')
+    const isSvg = useMemo(
+        () => message.content.startsWith('<svg'),
+        [message.content]
+    )
+    const isLink = useMemo(
+        () =>
+            message.content.startsWith('http') &&
+            !message.content.includes('supabase.co/storage'),
+        [message.content]
+    )
+    const isFile = useMemo(
+        () =>
+            message.content.startsWith('http') &&
+            message.content.includes('supabase.co/storage'),
+        [message.content]
+    )
 
     return (
         <li className={isSameSenderAsPrevious ? 'mt-0' : 'mt-4'}>
@@ -169,6 +184,6 @@ function Message({ message, index }: { message: MessageType; index: number }) {
             </div>
         </li>
     )
-}
+})
 
 export default Message
