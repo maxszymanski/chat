@@ -24,7 +24,7 @@ function UserAboutMe() {
                     <ChatBubbleLeftEllipsisIcon className="  p-1.5 w-9 h-9 " />
                 </button>
             </div>
-            <div className="max-w-72 border border-stone-200 py-5  px-8 rounded-xl bg-slate-100 relative w-full text-center min-h-28">
+            <div className="max-w-72 border border-stone-200 py-5  px-8 rounded-xl bg-slate-100 relative w-full  min-h-28 sm:max-w-96">
                 <p className="text-gray-900 ">{aboutme}</p>
                 <button
                     className="w-9 h-9   rounded-full absolute -top-3 -right-3 bg-slate-100 object-cover object-center border border-stone-200 text-gray-900 hover:text-sky-600 duration-300 transition-colors"

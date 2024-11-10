@@ -1,19 +1,20 @@
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { signIn as loginApi } from '../services/apiAuth'
 
 import { User } from '../types/types'
-import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 function useLogin() {
-    const navigate = useNavigate()
+    const queryClient = useQueryClient()
     const { mutate: login, isPending } = useMutation({
         mutationFn: ({ email, password }: User) =>
             loginApi({ email, password }),
-        onSuccess: () => {
-            navigate('/chat')
+        onSuccess: (user) => {
+            queryClient.setQueryData(['user'], user.user)
         },
         onError: (err) => {
             console.log('Error', err)
+            toast.error('Podany email lub hasło jest niepoprawne')
         },
     })
     return { login, isPending }

@@ -12,9 +12,7 @@ export async function signIn({
         email,
         password,
     })
-    if (error) {
-        console.error('Logowanie nieudane:', error.message)
-    }
+    if (error) throw new Error(error.message)
     return data
 }
 
