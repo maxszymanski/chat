@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { signIn as loginApi } from '../services/apiAuth'
 
-import { User } from '../types/types'
+import { UserLogin } from '../types/types'
 import toast from 'react-hot-toast'
 
 function useLogin() {
     const queryClient = useQueryClient()
     const { mutate: login, isPending } = useMutation({
-        mutationFn: ({ email, password }: User) =>
+        mutationFn: ({ email, password }: UserLogin) =>
             loginApi({ email, password }),
         onSuccess: (user) => {
             queryClient.setQueryData(['user'], user.user)

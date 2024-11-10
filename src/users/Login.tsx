@@ -1,11 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useLogin from '../hooks/useLogin'
 import { User } from '../types/types'
-import SingUpAsGuestButton from '../components/SingUpAsGuestButton'
 import FormLink from '../components/FormLink'
 import HomeFormButton from '../components/HomeFormButton'
 import FormButtonsBox from '../components/FormButtonsBox'
 import FormRow from '../components/FormRow'
+import LoginTestButton from '../components/LoginTestButton'
 
 function Login() {
     const { login, isPending } = useLogin()
@@ -67,7 +67,7 @@ function Login() {
                 <FormButtonsBox>
                     <HomeFormButton isPending={isPending} text="Zaloguj" />
                     <FormLink to="/signup" text="Wpisz się" />
-                    <SingUpAsGuestButton />
+                    <LoginTestButton />
                 </FormButtonsBox>
             </form>
         </>
