@@ -52,6 +52,14 @@ export async function updateReadStatus({ id = '', read_status = false }) {
         .select()
     if (error) throw new Error(error.message)
 }
+export async function updateAlertStatus({ id = '', alert = false }) {
+    const { error } = await supabase
+        .from('messages')
+        .update({ alert })
+        .eq('id', id)
+        .select()
+    if (error) throw new Error(error.message)
+}
 
 export async function uploadFile({
     file,

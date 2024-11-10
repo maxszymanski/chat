@@ -8,10 +8,11 @@ import Loader from '../components/Loader'
 import { format, parseISO, isToday, isBefore, subDays } from 'date-fns'
 import { pl } from 'date-fns/locale'
 import newMessageSound from '../chat/plum.mp3'
+import { useUpdateAlertStatus } from '../hooks/useUpdateAlertStatus'
 
 function UserLink({ user }: { user: UserFriend }) {
     const [openModal, setOpenModal] = useState(false)
-
+    const { updateMessageAlertStatus } = useUpdateAlertStatus()
     const { username, avatar, id, status } = user
     const { userId } = useParams()
     const [isActive, setIsActive] = useState(false)
@@ -23,14 +24,19 @@ function UserLink({ user }: { user: UserFriend }) {
     }, [userId, id])
 
     useEffect(() => {
+        const lastMessage = messages[messages.length - 1]
         if (
-            messages[messages.length - 1]?.sender_id === id &&
-            messages[messages.length - 1]?.read_status === false &&
+            lastMessage?.sender_id === id &&
+            lastMessage?.read_status === false &&
+            lastMessage?.alert === false &&
             messages.length > 0
         ) {
             audioRef.current.play()
+            const messageToUpdate = { id: lastMessage.id, alert: true }
+
+            updateMessageAlertStatus(messageToUpdate)
         }
-    }, [messages, messages.length, id])
+    }, [messages, messages.length, id, updateMessageAlertStatus])
 
     const openLinkModal = (value: string | null) => {
         setOpenModal(value === id)
@@ -82,7 +88,7 @@ function UserLink({ user }: { user: UserFriend }) {
             className={`relative w-full    flex items-center gap-1.5 px-3 transition-colors duration-300 rounded-xl ${isActive ? 'bg-sky-200 hover:bg-sky-200' : 'bg-transparent hover:bg-sky-100'} `}
         >
             <button
-                className="shrink-0 border-2  duration-300 transition-colors rounded-full hover:border-sky-400 border border-sky-200"
+                className="shrink-0  duration-300 transition-colors rounded-full hover:border-sky-400 border border-sky-200"
                 value={id}
                 onClick={(e) =>
                     openLinkModal((e.target as HTMLButtonElement).value)

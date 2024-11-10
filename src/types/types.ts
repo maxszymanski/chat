@@ -21,6 +21,10 @@ export interface MessageToUpdate {
     id: string
     read_status: boolean
 }
+export interface MessageAlertToUpdate {
+    id: string
+    alert: boolean
+}
 
 export interface ChatContextType {
     modalState: { isOpen: boolean; modalType: string | null }
@@ -45,6 +49,7 @@ export interface Message {
     receiver_id: string
     sender_id: string
     read_status: boolean
+    alert: boolean
 }
 export interface Pass {
     password: string
